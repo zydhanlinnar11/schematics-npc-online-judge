@@ -41,6 +41,7 @@ security:
                 authenticators:
                     - App\Security\DOMJudgeIPAuthenticator
                     - App\Security\DOMJudgeBasicAuthenticator
+                    - App\Security\JwtAuthenticator
                 entry_point: App\Security\DOMJudgeIPAuthenticator
 
         # rest of app does form_login
@@ -52,6 +53,7 @@ security:
                 authenticators:
                     - App\Security\DOMJudgeXHeadersAuthenticator
                     - App\Security\DOMJudgeIPAuthenticator
+                    - App\Security\JwtAuthenticator
                 entry_point: App\Security\DOMJudgeXHeadersAuthenticator
             anonymous: ~
             form_login:
