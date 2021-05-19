@@ -4,4 +4,4 @@ Repository ini berisi source code dari online judge yang akan digunakan untuk Sc
 
 Online judge :
 - Schematics NPC Senior : [DOMJudge 7.3](https://github.com/zydhanlinnar11/schematics-npc-online-judge/tree/senior-domjudge-7.3)
-- Schematics NPC Junior : -
+- Schematics NPC Junior : [DMOJ 2.1](https://github.com/zydhanlinnar11/schematics-npc-online-judge/tree/junior-dmoj-2.1)
