@@ -51,6 +51,7 @@ register_patterns = [
                                    title='Registration not allowed'),
         name='registration_disallowed'),
     url(r'^login/$', user.CustomLoginView.as_view(), name='auth_login'),
+    url(r'^schematics/auth/login$', user.schematics_auth_login, name='schematics_auth_login'),
     url(r'^logout/$', user.UserLogoutView.as_view(), name='auth_logout'),
     url(r'^password/change/$', user.CustomPasswordChangeView.as_view(), name='password_change'),
     url(r'^password/change/done/$', auth_views.PasswordChangeDoneView.as_view(
@@ -108,7 +109,7 @@ urlpatterns = [
 
     url(r'^problems/$', problem.ProblemList.as_view(), name='problem_list'),
     url(r'^problems/random/$', problem.RandomProblem.as_view(), name='problem_random'),
-
+    url(r'^get_csrf/$', user.get_csrf_token, name='get_csrf_token'),
     url(r'^problem/(?P<problem>[^/]+)', include([
         url(r'^$', problem.ProblemDetail.as_view(), name='problem_detail'),
         url(r'^/editorial$', problem.ProblemSolution.as_view(), name='problem_editorial'),

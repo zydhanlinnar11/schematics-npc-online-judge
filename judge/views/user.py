@@ -1,19 +1,25 @@
+from base64 import decode
 import itertools
 import json
 from datetime import datetime
 from operator import attrgetter, itemgetter
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse, HttpResponseBadRequest
+import jwt
+from django.middleware.csrf import get_token
 
 from django.conf import settings
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, User
 from django.contrib.auth.views import LoginView, PasswordChangeView, redirect_to_login
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import Count, Max, Min
 from django.http import Http404, HttpResponseRedirect, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.formats import date_format
@@ -376,3 +382,51 @@ class UserLogoutView(TitleMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         auth_logout(request)
         return HttpResponseRedirect(request.get_full_path())
+
+def get_contest_redirection(decoded_jwt):
+    try:
+        redirect_to = decoded_jwt['redirect']
+    except:
+        redirect_to = '/'
+    return redirect_to
+
+def schematics_auth_login(request: HttpRequest):
+    if request.method != 'POST':
+        return HttpResponseBadRequest('Invalid method')
+    jwt_algorithm = 'HS256'
+    try:
+        token = request.POST.get('token')
+    except KeyError:
+        raise Http404()
+
+    try:
+        decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
+        email = decoded_jwt['email']
+    except:
+        return HttpResponseBadRequest('Failed to decode token.')
+
+    try:
+        user_obj = User.objects.get(email=email)
+    except User.DoesNotExist:
+        HttpResponseBadRequest('User does not exist')
+    auth_login(request, user_obj, backend='django.contrib.auth.backends.ModelBackend')
+    return HttpResponseRedirect(get_contest_redirection(decoded_jwt))
+
+def get_csrf_token(request: HttpRequest):
+    jwt_algorithm = 'HS256'
+    try:
+        token = request.GET['token']
+    except KeyError:
+        raise Http404()
+    try:
+        decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
+        username = decoded_jwt['username']
+        key = decoded_jwt['key']
+    except:
+        return HttpResponseBadRequest('Failed to decode token.')
+    is_username_valid = username == settings.SCHEMATICS_ADMIN_USERNAME
+    is_key_valid = key == settings.SCHEMATICS_ADMIN_KEY
+    if is_username_valid and is_key_valid:
+        return JsonResponse({'csrf_token' : get_token(request)})
+    else:
+        return HttpResponseBadRequest('Username or key invalid')
