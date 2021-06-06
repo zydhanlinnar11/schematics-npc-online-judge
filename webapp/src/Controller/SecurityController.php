@@ -12,6 +12,7 @@ use App\Service\ConfigurationService;
 use App\Service\DOMJudgeService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,7 +99,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/schematics/redirect", name="redirect_to_schematics")
+     * @Route("/schematics/redirect", name="redirect_to_schematics", methods={"GET"})
      * @return RedirectResponse
      * @throws Exception
      */
@@ -107,12 +108,15 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/schematics/callback", name="callback_from_schematics")
-     * @return RedirectResponse
+     * @Route("/schematics/callback", name="callback_from_schematics", methods={"POST"})
+     * @return Response
      * @throws Exception
      */
     public function callbackFromSchematics() {
-        return new RedirectResponse($this->generateUrl('public_index'));
+        $user = $this->getUser();
+        if($user == null)
+            return new JsonResponse(['message' => 'Login failed'], 400);
+        return new JsonResponse(['message' => 'Login success'], 200);
     }
 
     /**
