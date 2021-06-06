@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use \Firebase\JWT\JWT;
 
-class JwtAuthenticator extends AbstractGuardAuthenticator
+class SchematicsAuthenticator extends AbstractGuardAuthenticator
 {
     private $security;
     private $params;
@@ -29,14 +29,15 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
     public function getCredentials(Request $request)
     {
-        return $request->headers->get('Schematics-JWT-Authorization');
+        return $request->get('token', '');
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         try {
-            $credentials = str_replace('Bearer ', '', $credentials);
             $jwt = (array) JWT::decode($credentials, $this->params->get('jwt_secret'), ['HS256']);
+            if(!isset($jwt['exp']) || $jwt['exp'] < time())
+                throw new AuthenticationException('Token expired.');
             return $userProvider->loadUserByUsername($jwt['username']);
         } catch (Exception $exception) {
             throw new AuthenticationException($exception->getMessage());
@@ -71,7 +72,8 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
             return false;
         }
 
-        return $request->headers->has('Schematics-JWT-Authorization');
+        return $request->get('token') != null && $request->getMethod() == 'POST'
+            && ($request->get('_route') === 'callback_from_schematics');
     }
 
     /**

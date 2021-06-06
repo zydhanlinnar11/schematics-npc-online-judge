@@ -98,6 +98,24 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/schematics/redirect", name="redirect_to_schematics")
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function redirectToSchematics() {
+        return new RedirectResponse('/my/sch-npc/auth/senior');
+    }
+
+    /**
+     * @Route("/schematics/callback", name="callback_from_schematics")
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function callbackFromSchematics() {
+        return new RedirectResponse($this->generateUrl('public_index'));
+    }
+
+    /**
      * @Route("/register", name="register")
      * @param Request                       $request
      * @param AuthorizationCheckerInterface $authorizationChecker

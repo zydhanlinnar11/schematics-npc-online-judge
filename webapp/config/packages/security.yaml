@@ -41,7 +41,7 @@ security:
                 authenticators:
                     - App\Security\DOMJudgeIPAuthenticator
                     - App\Security\DOMJudgeBasicAuthenticator
-                    - App\Security\JwtAuthenticator
+                    - App\Security\SchematicsAuthenticator
                 entry_point: App\Security\DOMJudgeIPAuthenticator
 
         # rest of app does form_login
@@ -53,7 +53,7 @@ security:
                 authenticators:
                     - App\Security\DOMJudgeXHeadersAuthenticator
                     - App\Security\DOMJudgeIPAuthenticator
-                    - App\Security\JwtAuthenticator
+                    - App\Security\SchematicsAuthenticator
                 entry_point: App\Security\DOMJudgeXHeadersAuthenticator
             anonymous: ~
             form_login:
@@ -69,6 +69,8 @@ security:
     access_control:
         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/schematics/redirect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/schematics/callback, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
