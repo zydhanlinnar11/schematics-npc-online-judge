@@ -1,4 +1,4 @@
-DMOJ Docker [![Build Status](https://github.com/zydhanlinnar11/dmoj-docker/workflows/Build%20Docker%20Images/badge.svg)](https://github.com/zydhanlinnar11/dmoj-docker/actions/)
+DMOJ Docker [![Build Status](https://github.com/zydhanlinnar11/schematics-npc-online-judge/workflows/Build%20Docker%20Images/badge.svg)](https://github.com/zydhanlinnar11/schematics-npc-online-judge/actions/)
 =====
 
 This repository contains the Docker files to run a clone of the [DMOJ site](https://github.com/DMOJ/online-judge). It does not configure any additional services, such as camo, mathoid, and texoid.
