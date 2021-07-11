@@ -28,13 +28,13 @@ jobs:
         if: (github.event_name == 'push' || github.event_name == 'schedule') && github.ref == 'refs/heads/master'
         run: |
           echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-          docker push ninjaclasher/dmoj-base:latest
-          docker push ninjaclasher/dmoj-texoid:latest
-          docker push ninjaclasher/dmoj-mathoid:latest
-          docker push ninjaclasher/dmoj-site:latest
-          docker push ninjaclasher/dmoj-celery:latest
-          docker push ninjaclasher/dmoj-bridged:latest
-          docker push ninjaclasher/dmoj-wsevent:latest
+          docker push zydhanlinnar11/dmoj-base:latest
+          docker push zydhanlinnar11/dmoj-texoid:latest
+          docker push zydhanlinnar11/dmoj-mathoid:latest
+          docker push zydhanlinnar11/dmoj-site:latest
+          docker push zydhanlinnar11/dmoj-celery:latest
+          docker push zydhanlinnar11/dmoj-bridged:latest
+          docker push zydhanlinnar11/dmoj-wsevent:latest
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
