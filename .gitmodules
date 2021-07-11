@@ -1,3 +1,4 @@
 [submodule "dmoj/repo"]
 	path = dmoj/repo
 	url = https://github.com/zydhanlinnar11/schematics-npc-online-judge
+	branch = junior-dmoj-2.1
