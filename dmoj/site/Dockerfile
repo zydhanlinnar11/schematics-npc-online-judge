@@ -1,4 +1,4 @@
-FROM ninjaclasher/dmoj-base:latest
+FROM zydhanlinnar11/dmoj-base:latest
 
 EXPOSE 8000
 

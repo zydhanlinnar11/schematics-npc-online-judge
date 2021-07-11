@@ -17,13 +17,13 @@ services:
     build:
       context: .
       dockerfile: ./base/Dockerfile
-    image: ninjaclasher/dmoj-base
+    image: zydhanlinnar11/dmoj-base
     network_mode: none
   site:
     build:
       context: .
       dockerfile: ./site/Dockerfile
-    image: ninjaclasher/dmoj-site
+    image: zydhanlinnar11/dmoj-site
     restart: unless-stopped
     volumes:
       - ./logs/:/logs/
@@ -40,7 +40,7 @@ services:
     build:
       context: .
       dockerfile: ./celery/Dockerfile
-    image: ninjaclasher/dmoj-celery
+    image: zydhanlinnar11/dmoj-celery
     restart: unless-stopped
     volumes:
       - datacache:/datacache/
@@ -54,7 +54,7 @@ services:
     build:
       context: .
       dockerfile: ./bridged/Dockerfile
-    image: ninjaclasher/dmoj-bridged
+    image: zydhanlinnar11/dmoj-bridged
     restart: unless-stopped
     volumes:
       - ./logs/:/logs/
@@ -70,7 +70,7 @@ services:
     build:
       context: .
       dockerfile: ./wsevent/Dockerfile
-    image: ninjaclasher/dmoj-wsevent
+    image: zydhanlinnar11/dmoj-wsevent
     restart: unless-stopped
     volumes:
       - ./repo/:/app/site/
