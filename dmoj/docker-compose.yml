@@ -66,17 +66,6 @@ services:
     ports:
       - 9999:9999
     depends_on: [base, db, redis]
-  wsevent:
-    build:
-      context: .
-      dockerfile: ./wsevent/Dockerfile
-    image: zydhanlinnar11/dmoj-wsevent
-    restart: unless-stopped
-    volumes:
-      - ./repo/:/app/site/
-    working_dir: /app/site
-    env_file: [environment/mysql.env, environment/site.env]
-    networks: [site, nginx]
   nginx:
     container_name: dmoj_nginx
     image: nginx:alpine
@@ -90,7 +79,7 @@ services:
       - ./media/:/media/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks: [nginx]
-    depends_on: [site, wsevent]
+    depends_on: [site]
 
 networks:
   site:
