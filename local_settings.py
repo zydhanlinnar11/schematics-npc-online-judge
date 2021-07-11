@@ -227,14 +227,6 @@ MATHOID_URL = 'http://mathoid:10044'
 MATHOID_CACHE_ROOT = '/cache/mathoid/'
 MATHOID_CACHE_URL = '//{host}/mathoid/'.format(host=HOST)
 
-############
-## Texoid ##
-############
-
-TEXOID_URL = 'http://texoid:8888'
-TEXOID_CACHE_ROOT = '/cache/texoid/'
-TEXOID_CACHE_URL = '//{host}/texoid/'.format(host=HOST)
-
 ## ======== Logging Settings ========
 # Documentation: https://docs.djangoproject.com/en/1.9/ref/settings/#logging
 #                https://docs.python.org/2/library/logging.config.html#logging-config-dictschema
