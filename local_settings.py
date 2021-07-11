@@ -14,11 +14,10 @@
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', '0') == '1'
-HOST = os.environ.get('HOST', '')
 
 # Uncomment and set to the domain names this site is intended to serve.
 # You must do this once you set DEBUG to False.
-ALLOWED_HOSTS = [HOST]
+ALLOWED_HOSTS = ['schematics.its.ac.id', 'sch-npc-junior.zydhan.xyz']
 
 # Optional apps that DMOJ can make use of.
 INSTALLED_APPS += ()
@@ -162,13 +161,13 @@ EVENT_DAEMON_USE = True
 #EVENT_DAEMON_POST = '<ws:// URL to post to>'
 
 # If you are using the defaults from the guide, it is this:
-EVENT_DAEMON_POST = 'ws://wsevent:15101/'
+# EVENT_DAEMON_POST = 'ws://wsevent:15101/'
 
 # These are the publicly accessed interface configurations.
 # They should match those used by the script.
-EVENT_DAEMON_GET = 'ws://{host}/event/'.format(host=HOST)
-EVENT_DAEMON_GET_SSL = 'wss://{host}/event/'.format(host=HOST)
-EVENT_DAEMON_POLL = '/channels/'
+# EVENT_DAEMON_GET = 'ws://{host}/event/'.format(host=HOST)
+# EVENT_DAEMON_GET_SSL = 'wss://{host}/event/'.format(host=HOST)
+# EVENT_DAEMON_POLL = '/channels/'
 
 # If you would like to use the AMQP-based event server from <https://github.com/DMOJ/event-server>,
 # uncomment this section instead. This is more involved, and recommended to be done
@@ -218,14 +217,6 @@ USE_SELENIUM = True
 DMOJ_USER_DATA_DOWNLOAD = True
 DMOJ_USER_DATA_CACHE = '/datacache'
 DMOJ_USER_DATA_INTERNAL = '/datacache'
-
-############
-## Texoid ##
-############
-
-TEXOID_URL = 'http://texoid:8888'
-TEXOID_CACHE_ROOT = '/cache/texoid/'
-TEXOID_CACHE_URL = '//{host}/texoid/'.format(host=HOST)
 
 ## ======== Logging Settings ========
 # Documentation: https://docs.djangoproject.com/en/1.9/ref/settings/#logging
