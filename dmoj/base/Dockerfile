@@ -6,7 +6,7 @@ RUN apt-get update && \
         libxml2-dev libxslt1-dev zlib1g-dev \
         mariadb-client libmariadbclient-dev \
         debconf-utils python3-pip python3-dev python3 && \
-    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
