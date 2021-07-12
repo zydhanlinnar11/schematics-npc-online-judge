@@ -404,7 +404,6 @@ def schematics_auth_login(request: HttpRequest):
         return JsonResponse({'message': 'Bad referer ' + referer.geturl()}, status=403)
     if request.method != 'GET':
         return JsonResponse({'message': 'Only support GET method'}, status=400)
-    return JsonResponse({'message': request.GET.get('token')}, status=200)
     jwt_algorithm = 'HS256'
     try:
         token = request.GET.get('token')
@@ -415,11 +414,11 @@ def schematics_auth_login(request: HttpRequest):
         decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
         email = decoded_jwt['email']
     except Exception:
-        return HttpResponseBadRequest('Failed to decode token.')
+        return JsonResponse({'message': 'Failed to decode token'}, status=400)
 
     try:
         user_obj = User.objects.get(email=email)
     except User.DoesNotExist:
-        HttpResponseBadRequest('User does not exist')
+        return JsonResponse({'message': 'User does not exist'}, status=400)
     auth_login(request, user_obj, backend='django.contrib.auth.backends.ModelBackend')
-    return HttpResponseRedirect(get_contest_redirection(decoded_jwt))
+    return JsonResponse({'message': 'Login success as ' + user_obj.username}, status=200)
