@@ -112,3 +112,7 @@ server {
 ```
 
 In this case, the port that the Nginx instance in the Docker container is published to would need to be modified to `10080`.
+
+### About subdirectories and domain
+
+We need to change nginx.conf, demo and navbar fixtures, uwsgi.ini, dmoj-wpadmin in settings.py
