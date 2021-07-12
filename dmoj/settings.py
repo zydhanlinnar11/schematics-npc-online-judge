@@ -590,3 +590,5 @@ try:
         exec(f.read(), globals())
 except IOError:
     pass
+
+CSRF_TRUSTED_ORIGINS = ['schematics.its.ac.id', 'sch-npc-junior.zydhan.xyz']

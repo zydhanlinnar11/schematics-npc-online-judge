@@ -7,6 +7,8 @@ import jwt
 from django.http.response import HttpResponseBadRequest
 from django.conf import settings
 from django.middleware.csrf import get_token
+from urllib.parse import urlparse
+from django.utils.http import is_same_domain
 
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -392,11 +394,20 @@ def get_contest_redirection(decoded_jwt):
 
 
 def schematics_auth_login(request: HttpRequest):
-    if request.method != 'POST':
-        return HttpResponseBadRequest('Invalid method')
+    referer = request.META.get('HTTP_REFERER')
+    if referer is None:
+        return JsonResponse({'message': 'No referer'}, status=403)
+    referer = urlparse(referer)
+    if referer.scheme != 'https':
+        return JsonResponse({'message': 'Connection not secure'}, status=403)
+    if not any(is_same_domain(referer.netloc, host) for host in settings.CSRF_TRUSTED_ORIGINS):
+        return JsonResponse({'message': 'Bad referer ' + referer.geturl()}, status=403)
+    if request.method != 'GET':
+        return JsonResponse({'message': 'Only support GET method'}, status=400)
+    return JsonResponse({'message': request.GET.get('token')}, status=200)
     jwt_algorithm = 'HS256'
     try:
-        token = request.POST.get('token')
+        token = request.GET.get('token')
     except KeyError:
         raise Http404()
 
@@ -412,22 +423,3 @@ def schematics_auth_login(request: HttpRequest):
         HttpResponseBadRequest('User does not exist')
     auth_login(request, user_obj, backend='django.contrib.auth.backends.ModelBackend')
     return HttpResponseRedirect(get_contest_redirection(decoded_jwt))
-
-def get_csrf_token(request: HttpRequest):
-    jwt_algorithm = 'HS256'
-    try:
-        token = request.GET['token']
-    except KeyError:
-        raise Http404()
-    try:
-        decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
-        username = decoded_jwt['username']
-        key = decoded_jwt['key']
-    except Exception:
-        return HttpResponseBadRequest('Failed to decode token.')
-    is_username_valid = username == settings.SCHEMATICS_ADMIN_USERNAME
-    is_key_valid = key == settings.SCHEMATICS_ADMIN_KEY
-    if is_username_valid and is_key_valid:
-        return JsonResponse({'csrf_token': get_token(request)})
-    else:
-        return HttpResponseBadRequest('Username or key invalid')
