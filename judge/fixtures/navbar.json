@@ -7,7 +7,7 @@
             "lft": 1,
             "order": 1,
             "parent": null,
-            "path": "problems",
+            "path": "/sch-npc/portal/junior/problems",
             "regex": "^/problem",
             "rght": 2,
             "tree_id": 1
@@ -23,7 +23,7 @@
             "lft": 1,
             "order": 2,
             "parent": null,
-            "path": "submissions",
+            "path": "/sch-npc/portal/junior/submissions",
             "regex": "^/submi|^/src/",
             "rght": 2,
             "tree_id": 2
@@ -39,7 +39,7 @@
             "lft": 1,
             "order": 3,
             "parent": null,
-            "path": "users",
+            "path": "/sch-npc/portal/junior/users",
             "regex": "^/user",
             "rght": 2,
             "tree_id": 3
@@ -55,7 +55,7 @@
             "lft": 1,
             "order": 5,
             "parent": null,
-            "path": "contests",
+            "path": "/sch-npc/portal/junior/contests",
             "regex": "^/contest",
             "rght": 2,
             "tree_id": 4
@@ -87,7 +87,7 @@
             "lft": 2,
             "order": 7,
             "parent": 6,
-            "path": "status",
+            "path": "/sch-npc/portal/junior/status",
             "regex": "^/status/$|^/judge/",
             "rght": 3,
             "tree_id": 5
