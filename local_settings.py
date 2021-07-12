@@ -54,7 +54,7 @@ DATABASES = {
 # Internationalization.
 # Documentation: <https://docs.djangoproject.com/en/1.11/topics/i18n/>
 LANGUAGE_CODE = 'en-ca'
-DEFAULT_USER_TIME_ZONE = 'America/Toronto'
+DEFAULT_USER_TIME_ZONE = 'Asia/Jakarta'
 USE_I18N = True
 USE_L10N = True
 dUSE_TZ = True
@@ -104,10 +104,10 @@ STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 
 # A tuple of (name, email) pairs that specifies those who will be mailed
 # when the server experiences an error when DEBUG = False.
-ADMINS = ()
+ADMINS = ('Zydhan Linnar Putra', 'zydhan.19051@mhs.its.ac.id')
 
 # The sender for the aforementioned emails.
-SERVER_EMAIL = 'DMOJ: Modern Online Judge <errors@dmoj.ca>'
+SERVER_EMAIL = 'Zydhan Linnar Putra <zydhan.19051@mhs.its.ac.id>'
 
 
 ##################################################
@@ -132,9 +132,9 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStora
 ############################################
 
 ## DMOJ site display settings.
-SITE_NAME = 'DMOJ'
-SITE_LONG_NAME = 'DMOJ: Modern Online Judge'
-SITE_ADMIN_EMAIL = 'admin@example.com'
+SITE_NAME = 'Schematics NPC Junior 2021'
+SITE_LONG_NAME = 'Schematics NPC Junior 2021'
+SITE_ADMIN_EMAIL = 'zydhan.19051@mhs.its.ac.id'
 TERMS_OF_SERVICE_URL = None
 
 ## Bridge controls.
