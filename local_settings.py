@@ -282,3 +282,4 @@ DMOJ_RESOURCES = '/assets/resources/'
 
 MEDIA_ROOT = '/media/'
 MEDIA_URL = '/sch-npc/portal/junior/media/'
+SCHEMATICS_JWT_SECRET = os.environ.get('SCHEMATICS_JWT_SECRET', '')
