@@ -3,5 +3,5 @@ cd $(dirname $(dirname $0)) || exit
 
 mkdir logs problems media
 
-mv ../local_settings.py repo/dmoj/
-mv ../uwsgi.ini repo/
+cp ../local_settings.py repo/dmoj/
+cp ../uwsgi.ini repo/
