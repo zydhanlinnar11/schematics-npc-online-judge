@@ -115,4 +115,4 @@ In this case, the port that the Nginx instance in the Docker container is publis
 
 ### About subdirectories and domain
 
-We need to change nginx.conf, demo and navbar fixtures, uwsgi.ini, dmoj-wpadmin in settings.py
+We need to change nginx.conf, demo and navbar fixtures, uwsgi.ini, dmoj-wpadmin in settings.py, static_url and media_url in local_settings.py.

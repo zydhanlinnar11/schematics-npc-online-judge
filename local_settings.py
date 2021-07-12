@@ -122,7 +122,7 @@ SERVER_EMAIL = 'DMOJ: Modern Online Judge <errors@dmoj.ca>'
 STATIC_ROOT = '/assets/static/'
 
 # URL to access static files.
-STATIC_URL = '/static/'
+STATIC_URL = '/sch-npc/portal/junior/static/'
 
 # Uncomment to use hashed filenames with the cache framework.
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
@@ -281,4 +281,4 @@ DMOJ_PROBLEM_DATA_ROOT = '/problems/'
 DMOJ_RESOURCES = '/assets/resources/'
 
 MEDIA_ROOT = '/media/'
-MEDIA_URL = '/media/'
+MEDIA_URL = '/sch-npc/portal/junior/media/'
