@@ -52,6 +52,7 @@ register_patterns = [
         name='registration_disallowed'),
     url(r'^login/$', user.CustomLoginView.as_view(), name='auth_login'),
     url(r'^schematics/auth/login$', user.schematics_auth_login, name='schematics_auth_login'),
+    url(r'^schematics/auth/register$', user.schematics_auth_register, name='schematics_auth_register'),
     url(r'^logout/$', user.UserLogoutView.as_view(), name='auth_logout'),
     url(r'^password/change/$', user.CustomPasswordChangeView.as_view(), name='password_change'),
     url(r'^password/change/done/$', auth_views.PasswordChangeDoneView.as_view(

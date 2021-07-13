@@ -1,15 +1,17 @@
+from django.db.models.base import Model
 import itertools
 import json
 from datetime import datetime
 from operator import attrgetter, itemgetter
 from django.http.request import HttpRequest
 import jwt
-from django.http.response import HttpResponseBadRequest
 from django.conf import settings
 from urllib.parse import urlparse
 from django.utils.http import is_same_domain
 from calendar import timegm
 from typing import Union
+import random
+import string
 
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -33,7 +35,7 @@ from django.views.generic import DetailView, ListView, TemplateView
 from reversion import revisions
 
 from judge.forms import CustomAuthenticationForm, ProfileForm, newsletter_id
-from judge.models import Profile, Rating, Submission
+from judge.models import Organization, Profile, Rating, Submission
 from judge.performance_points import get_pp_breakdown
 from judge.ratings import rating_class, rating_progress
 from judge.utils.problems import contest_completed_ids, user_completed_ids
@@ -424,7 +426,7 @@ def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exceptio
         raise Exception('Failed to decode token')
     return email
 
-def schematics_auth_login(request: HttpRequest):
+def schematics_auth_login(request: HttpRequest) -> JsonResponse:
     try:
         verify_referer(request)
     except Exception as e:
@@ -443,3 +445,56 @@ def schematics_auth_login(request: HttpRequest):
     auth_login(request, user_obj, backend='django.contrib.auth.backends.ModelBackend')
 
     return JsonResponse({'message': 'Login success as ' + user_obj.username}, status=200)
+
+def create_or_find_school(school_name: str, school_shortname: str) -> str:
+    try:
+        school = Organization.objects.get(name=school_name)
+        return school
+    except Organization.DoesNotExist:
+        zydhan = Profile.objects.get(pk=1)
+        nopal = Profile.objects.get(pk=2)
+        syafiq = Profile.objects.get(pk=3)
+        daniel = Profile.objects.get(pk=4)
+        school = Organization.objects.create(short_name=school_shortname, name=school_name, is_open=False, registrant=nopal)
+        school.admins.add(zydhan, nopal, syafiq, daniel)
+        school.save()
+        return school
+
+def create_user_profile(user: User, school: Organization, timezone: str) -> Profile:
+    profile = Profile.objects.create(math_engine="auto", user=user, timezone=timezone)
+    peserta_sch_npc = Organization.objects.get(pk=2)
+    profile.organizations.add(school, peserta_sch_npc)
+    profile.save()
+
+    return profile
+
+def create_user(email: str, name: str, school_name: str, school_shortname: str, username: str, timezone: str) -> User:
+    school = create_or_find_school(school_name, school_shortname)
+    user = User.objects.create(email=email, first_name=name, username=username, password='_blank', is_active=True, is_staff=False, is_superuser=False)
+    user.set_password(''.join(random.sample(string.ascii_letters + string.digits + string.punctuation, 16)))
+    user.save()
+    create_user_profile(user, school, timezone)
+
+    return user
+
+def schematics_auth_register(request: HttpRequest) -> JsonResponse:
+    try:
+        verify_referer(request)
+    except Exception as e:
+        return JsonResponse({'message': str(e)}, status=403)
+    
+    try:
+        email = request.GET['email']
+        name = request.GET['name']
+        school_name = request.GET['school_name']
+        id_in_schematics_db=request.GET['id_in_schematics_db']
+        timezone = request.GET.get('timezone', 'Asia/Jakarta')
+    except KeyError as e:
+        return JsonResponse({'message': str(e)}, status=400)
+    
+    school_shortname = school_name
+    if len(school_shortname) > 20:
+        school_shortname = school_shortname[0:19]
+    username = 'sch_npc_j{id_in_schematics_db}_{very_first_name_lowercase}'.format(id_in_schematics_db=id_in_schematics_db, very_first_name_lowercase=name.split(' ')[0]).lower()
+    create_user(email, name, school_name, school_shortname, username, timezone)
+    return JsonResponse({'message': 'User registered'})
