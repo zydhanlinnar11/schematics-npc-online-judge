@@ -133,7 +133,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStora
 
 ## DMOJ site display settings.
 SITE_NAME = 'Schematics NPC Junior 2021'
-SITE_LONG_NAME = 'Schematics NPC Junior 2021'
+SITE_LONG_NAME = 'Schematics NPC Junior | Schematics 2021 | Reviving the Soul of Technology through Art and Logic.'
 SITE_ADMIN_EMAIL = 'zydhan.19051@mhs.its.ac.id'
 TERMS_OF_SERVICE_URL = None
 
