@@ -1,0 +1,303 @@
+[
+    {
+        "fields": {
+            "about": "",
+            "ace_theme": "github",
+            "current_contest": null,
+            "display_rank": "admin",
+            "language": 15,
+            "math_engine": "auto",
+            "mute": false,
+            "organizations": [
+                1
+            ],
+            "performance_points": 0.0,
+            "points": 0.0,
+            "problem_count": 0,
+            "rating": null,
+            "timezone": "Asia/Jakarta",
+            "user": 1,
+            "user_script": ""
+        },
+        "model": "judge.profile",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "about": "",
+            "ace_theme": "github",
+            "current_contest": null,
+            "display_rank": "admin",
+            "language": 15,
+            "math_engine": "auto",
+            "mute": false,
+            "organizations": [
+                1
+            ],
+            "performance_points": 0.0,
+            "points": 0.0,
+            "problem_count": 0,
+            "rating": null,
+            "timezone": "Asia/Jakarta",
+            "user": 2,
+            "user_script": ""
+        },
+        "model": "judge.profile",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "about": "",
+            "ace_theme": "github",
+            "current_contest": null,
+            "display_rank": "admin",
+            "language": 15,
+            "math_engine": "auto",
+            "mute": false,
+            "organizations": [
+                1
+            ],
+            "performance_points": 0.0,
+            "points": 0.0,
+            "problem_count": 0,
+            "rating": null,
+            "timezone": "Asia/Jakarta",
+            "user": 3,
+            "user_script": ""
+        },
+        "model": "judge.profile",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "about": "",
+            "ace_theme": "github",
+            "current_contest": null,
+            "display_rank": "admin",
+            "language": 15,
+            "math_engine": "auto",
+            "mute": false,
+            "organizations": [
+                1
+            ],
+            "performance_points": 0.0,
+            "points": 0.0,
+            "problem_count": 0,
+            "rating": null,
+            "timezone": "Asia/Jakarta",
+            "user": 4,
+            "user_script": ""
+        },
+        "model": "judge.profile",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "about": "",
+            "ace_theme": "github",
+            "current_contest": null,
+            "display_rank": "admin",
+            "language": 15,
+            "math_engine": "auto",
+            "mute": false,
+            "organizations": [
+                1
+            ],
+            "performance_points": 0.0,
+            "points": 0.0,
+            "problem_count": 0,
+            "rating": null,
+            "timezone": "Asia/Jakarta",
+            "user": 5,
+            "user_script": ""
+        },
+        "model": "judge.profile",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "about": "",
+            "ace_theme": "github",
+            "current_contest": null,
+            "display_rank": "admin",
+            "language": 15,
+            "math_engine": "auto",
+            "mute": false,
+            "organizations": [
+                1
+            ],
+            "performance_points": 0.0,
+            "points": 0.0,
+            "problem_count": 0,
+            "rating": null,
+            "timezone": "Asia/Makassar",
+            "user": 6,
+            "user_script": ""
+        },
+        "model": "judge.profile",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "about": "",
+            "ace_theme": "github",
+            "current_contest": null,
+            "display_rank": "admin",
+            "language": 15,
+            "math_engine": "auto",
+            "mute": false,
+            "organizations": [
+                1
+            ],
+            "performance_points": 0.0,
+            "points": 0.0,
+            "problem_count": 0,
+            "rating": null,
+            "timezone": "Asia/Jakarta",
+            "user": 7,
+            "user_script": ""
+        },
+        "model": "judge.profile",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "date_joined": "2021-07-10T12:45:00+07:00",
+            "email": "zydhan.19051@mhs.its.ac.id",
+            "first_name": "Zydhan Linnar Putra",
+            "groups": [
+
+            ],
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+            "user_permissions": [
+
+            ],
+            "username": "zydhanlinnar11"
+        },
+        "model": "auth.user",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "date_joined": "2021-07-10T12:45:00+07:00",
+            "email": "faadhilah56@gmail.com",
+            "first_name": "Naufal Faadhilah",
+            "groups": [
+
+            ],
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+            "user_permissions": [
+
+            ],
+            "username": "faadhilah56"
+        },
+        "model": "auth.user",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "date_joined": "2021-07-10T12:45:00+07:00",
+            "email": "syafiqjos@gmail.com",
+            "first_name": "Ahmad Syafiq Aqil Wafi",
+            "groups": [
+
+            ],
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+            "user_permissions": [
+
+            ],
+            "username": "syafiqjos"
+        },
+        "model": "auth.user",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "date_joined": "2021-07-10T12:45:00+07:00",
+            "email": "danielsugianto9@gmail.com",
+            "first_name": "danielsugianto9",
+            "groups": [
+
+            ],
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+            "user_permissions": [
+
+            ],
+            "username": "danielsugianto"
+        },
+        "model": "auth.user",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "date_joined": "2021-07-10T12:45:00+07:00",
+            "email": "aldoimoet01@gmail.com",
+            "first_name": "Daniel Sugianto",
+            "groups": [
+
+            ],
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+            "user_permissions": [
+
+            ],
+            "username": "aldoimoet01"
+        },
+        "model": "auth.user",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "date_joined": "2021-07-10T12:45:00+07:00",
+            "email": "akumahappanatuh@gmail.com",
+            "first_name": "Muhammad Affan",
+            "groups": [
+
+            ],
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+            "user_permissions": [
+
+            ],
+            "username": "MinumCoklatPanas"
+        },
+        "model": "auth.user",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "date_joined": "2021-07-10T12:45:00+07:00",
+            "email": "geofanny.emmanuel@gmail.com",
+            "first_name": "Emmanuel Maximus Yohanes",
+            "groups": [
+
+            ],
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+            "user_permissions": [
+
+            ],
+            "username": "1Maximuse"
+        },
+        "model": "auth.user",
+        "pk": 7
+    }
+]

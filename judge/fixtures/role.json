@@ -1,0 +1,40 @@
+[
+    {
+        "fields": {
+            "about": "Panitia dari Schematics NPC 2021.",
+            "access_code": null,
+            "admins": [
+                1, 3
+            ],
+            "creation_date": "2021-07-10T12:45:00+07:00",
+            "is_open": false,
+            "slug": "panitia-sch-npc-2021",
+            "name": "Panitia Schematics NPC 2021",
+            "registrant": 1,
+            "short_name": "PANITIA",
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "slots": null
+        },
+        "model": "judge.organization",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "about": "Peserta dari Schematics NPC Junior 2021.",
+            "access_code": null,
+            "admins": [
+                1, 3
+            ],
+            "creation_date": "2021-07-10T12:45:00+07:00",
+            "is_open": false,
+            "slug": "peserta-sch-npc-junior-2021",
+            "name": "Peserta Schematics NPC Junior 2021",
+            "registrant": 1,
+            "short_name": "PESERTA",
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "slots": null
+        },
+        "model": "judge.organization",
+        "pk": 2
+    }
+]

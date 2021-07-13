@@ -1,0 +1,67 @@
+[
+    
+    {
+        "fields": {
+            "full_name": "Tutorial Minggu ke-1",
+            "name": "Tutorial Minggu ke-1"
+        },
+        "model": "judge.problemgroup",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "full_name": "Tutorial Minggu ke-2",
+            "name": "Tutorial Minggu ke-2"
+        },
+        "model": "judge.problemgroup",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "full_name": "Tutorial Minggu ke-3",
+            "name": "Tutorial Minggu ke-3"
+        },
+        "model": "judge.problemgroup",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "full_name": "Tutorial Minggu ke-4",
+            "name": "Tutorial Minggu ke-4"
+        },
+        "model": "judge.problemgroup",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "full_name": "Penyisihan",
+            "name": "Penyisihan"
+        },
+        "model": "judge.problemgroup",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "full_name": "Penyisihan Backup",
+            "name": "Penyisihan Backup"
+        },
+        "model": "judge.problemgroup",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "full_name": "Final",
+            "name": "Final"
+        },
+        "model": "judge.problemgroup",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "full_name": "Final Backup",
+            "name": "Final Backup"
+        },
+        "model": "judge.problemgroup",
+        "pk": 9
+    }
+]

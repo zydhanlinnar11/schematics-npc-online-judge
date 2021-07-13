@@ -1,0 +1,149 @@
+[
+    {
+        "fields": {
+            "key" : "tutorial1",
+            "name" : "Tutorial Minggu ke-1",
+            "organizers" : [
+                1
+            ],
+            "description" : "Latihan soal untuk tutorial minggu pertama Schematics NPC Junior 2021.",
+            "start_time" : "2021-08-13T09:00:00+07:00",
+            "end_time" : "2021-08-20T09:00:00+07:00",
+            "hide_problem_tags" : true,
+            "is_organization_private" : true,
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "organizations" : [
+                2
+            ],
+            "summary" : "Latihan soal untuk tutorial minggu pertama Schematics NPC Junior 2021."
+        },
+        "model": "judge.contest",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "key" : "tutorial2",
+            "name" : "Tutorial Minggu ke-2",
+            "organizers" : [
+                1
+            ],
+            "description" : "Latihan soal untuk tutorial minggu kedua Schematics NPC Junior 2021.",
+            "start_time" : "2021-08-20T09:00:00+07:00",
+            "end_time" : "2021-08-27T09:00:00+07:00",
+            "hide_problem_tags" : true,
+            "is_organization_private" : true,
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "organizations" : [
+                2
+            ],
+            "summary" : "Latihan soal untuk tutorial minggu kedua Schematics NPC Junior 2021."
+        },
+        "model": "judge.contest",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "key" : "tutorial3",
+            "name" : "Tutorial Minggu ke-3",
+            "organizers" : [
+                1
+            ],
+            "description" : "Latihan soal untuk tutorial minggu ketiga Schematics NPC Junior 2021.",
+            "start_time" : "2021-08-27T09:00:00+07:00",
+            "end_time" : "2021-09-03T09:00:00+07:00",
+            "hide_problem_tags" : true,
+            "is_organization_private" : true,
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "organizations" : [
+                2
+            ],
+            "summary" : "Latihan soal untuk tutorial minggu ketiga Schematics NPC Junior 2021."
+        },
+        "model": "judge.contest",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "key" : "tutorial4",
+            "name" : "Tutorial Minggu ke-4",
+            "organizers" : [
+                1
+            ],
+            "description" : "Latihan soal untuk tutorial minggu keempat Schematics NPC Junior 2021.",
+            "start_time" : "2021-09-03T09:00:00+07:00",
+            "end_time" : "2021-09-10T09:00:00+07:00",
+            "hide_problem_tags" : true,
+            "is_organization_private" : true,
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "organizations" : [
+                2
+            ],
+            "summary" : "Latihan soal untuk tutorial minggu keempat Schematics NPC Junior 2021."
+        },
+        "model": "judge.contest",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "key" : "warmup",
+            "name" : "Pemanasan Schematics NPC Junior 2021.",
+            "organizers" : [
+                1
+            ],
+            "description" : "Babak Pemanasan Schematics NPC Junior 2021.\n\nSilahkan mencoba platform ini dengan sebaik-baiknya sebelum kontes sebenarnya. Tetap semangat!",
+            "start_time" : "2021-09-24T14:00:00+07:00",
+            "end_time" : "2021-09-25T02:00:00+07:00",
+            "hide_problem_tags" : true,
+            "is_organization_private" : true,
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "organizations" : [
+                2
+            ],
+            "summary" : "Babak Pemanasan Schematics NPC Junior 2021."
+        },
+        "model": "judge.contest",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "key" : "penyisihan",
+            "name" : "Penyisihan Schematics NPC Junior 2021.",
+            "organizers" : [
+                1
+            ],
+            "description" : "Babak Penyisihan Schematics NPC Junior 2021.",
+            "start_time" : "2021-09-25T09:00:00+07:00",
+            "end_time" : "2021-09-25T14:00:00+07:00",
+            "hide_problem_tags" : true,
+            "is_organization_private" : true,
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "organizations" : [
+                2
+            ],
+            "summary" : "Babak Penyisihan Schematics NPC Junior 2021."
+        },
+        "model": "judge.contest",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "key" : "final",
+            "name" : "Final Schematics NPC Junior 2021.",
+            "organizers" : [
+                1
+            ],
+            "description" : "Babak Final Schematics NPC Junior 2021.",
+            "start_time" : "2021-10-17T09:00:00+07:00",
+            "end_time" : "2021-10-17T14:00:00+07:00",
+            "hide_problem_tags" : true,
+            "is_organization_private" : true,
+            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
+            "organizations" : [
+                2
+            ],
+            "summary" : "Babak Final Schematics NPC Junior 2021."
+        },
+        "model": "judge.contest",
+        "pk": 7
+    }
+]

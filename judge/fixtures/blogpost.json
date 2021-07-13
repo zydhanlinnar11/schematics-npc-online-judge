@@ -1,0 +1,45 @@
+[
+    
+    {
+        "fields": {
+            "authors": [
+                1
+            ],
+            "content": "Ini adalah portal Schematics NPC Junior 2021 yang diperuntukkan sebagai platform tutorial hingga babak final pada Schematics NPC Junior 2021.",
+            "og_image": "",
+            "publish_on": "2021-07-10T12:45:00+07:00",
+            "slug": "selamat-datang-di-schematics-npc-junior-2021",
+            "sticky": true,
+            "summary": "",
+            "title": "Selamat datang di Schematics NPC Junior 2021",
+            "visible": true
+        },
+        "model": "judge.blogpost",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "author": 1,
+            "body": "Tetap semangat!",
+            "hidden": false,
+            "level": 0,
+            "lft": 1,
+            "page": "b:1",
+            "parent": null,
+            "rght": 2,
+            "score": 0,
+            "time": "2021-07-10T12:45:00+07:00",
+            "tree_id": 1
+        },
+        "model": "judge.comment",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "domain": "schematics.its.ac.id/sch-npc/portal/junior",
+            "name": "Schematics NPC Junior 2021"
+        },
+        "model": "sites.site",
+        "pk": 1
+    }
+]
