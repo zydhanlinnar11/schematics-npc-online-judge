@@ -12,7 +12,6 @@
             "name": "Panitia Schematics NPC 2021",
             "registrant": 1,
             "short_name": "PANITIA",
-            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
             "slots": null
         },
         "model": "judge.organization",
@@ -31,7 +30,6 @@
             "name": "Peserta Schematics NPC Junior 2021",
             "registrant": 1,
             "short_name": "PESERTA",
-            "logo_override_image" : "https://schematics.its.ac.id/image/white-logo.svg",
             "slots": null
         },
         "model": "judge.organization",
