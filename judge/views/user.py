@@ -6,9 +6,10 @@ from django.http.request import HttpRequest
 import jwt
 from django.http.response import HttpResponseBadRequest
 from django.conf import settings
-from django.middleware.csrf import get_token
 from urllib.parse import urlparse
 from django.utils.http import is_same_domain
+from calendar import timegm
+from typing import Union
 
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -392,33 +393,53 @@ def get_contest_redirection(decoded_jwt):
         redirect_to = '/'
     return redirect_to
 
-
-def schematics_auth_login(request: HttpRequest):
+def verify_referer(request: HttpRequest) -> Union[Exception, bool]:
     referer = request.META.get('HTTP_REFERER')
     if referer is None:
-        return JsonResponse({'message': 'No referer'}, status=403)
+        raise Exception('No referer')
     referer = urlparse(referer)
     if referer.scheme != 'https':
-        return JsonResponse({'message': 'Connection not secure'}, status=403)
+        raise Exception('Connection not secure')
     if not any(is_same_domain(referer.netloc, host) for host in settings.CSRF_TRUSTED_ORIGINS):
-        return JsonResponse({'message': 'Bad referer ' + referer.geturl()}, status=403)
+        raise Exception('Bad referer ' + referer.geturl())
     if request.method != 'GET':
-        return JsonResponse({'message': 'Only support GET method'}, status=400)
+        raise Exception('Only support GET method')
+    return True
+
+def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exception]:
     jwt_algorithm = 'HS256'
     try:
         token = request.GET.get('token')
     except KeyError:
-        raise Http404()
-
+        raise Exception('No token provided.')
+    
     try:
         decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
         email = decoded_jwt['email']
+        if 'exp' not in decoded_jwt:
+            raise Exception('Expired time required')
+    except jwt.ExpiredSignatureError:
+        raise Exception('Token Expired')
     except Exception:
-        return JsonResponse({'message': 'Failed to decode token'}, status=400)
+        raise Exception('Failed to decode token')
+    return email
+
+def schematics_auth_login(request: HttpRequest):
+    try:
+        verify_referer(request)
+    except Exception as e:
+        return JsonResponse({'message': str(e)}, status=403)
+
+    try:
+        email = get_email_from_schematics_token(request)
+    except Exception as e:
+        return JsonResponse({'message': str(e)}, status=403)
 
     try:
         user_obj = User.objects.get(email=email)
     except User.DoesNotExist:
         return JsonResponse({'message': 'User does not exist'}, status=400)
+        
     auth_login(request, user_obj, backend='django.contrib.auth.backends.ModelBackend')
+
     return JsonResponse({'message': 'Login success as ' + user_obj.username}, status=200)
