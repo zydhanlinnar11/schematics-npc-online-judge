@@ -31,6 +31,20 @@
         .github-icon i {
             color: black;
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        #button-schematics {
+            background: hsl(0, 0%, 0%);
+        }
+
+        #button-schematics:hover {
+            background: hsl(0, 0%, 15%);
+        }
+
+        #button-schematics:active {
+            background: hsl(0, 0%, 30%);
+        }
     </style>
 {% endblock %}
 
@@ -62,7 +76,11 @@
             <input type="hidden" name="next" value="{{ next }}">
         </form>
         <br><a href="{{ url('password_reset') }}">{{ _('Forgot your password?') }}</a>
-
+        <h4 style="margin-bottom: 8px;">{{ _('Or log in with...') }}</h4>
+        <button onclick="window.open('https://schematics.its.ac.id/dashboard/my/sch-npc/team', '_self')" aria-label="Login with Schematics" id="button-schematics">
+            <img width="48" height="48" src="{{ static('icons/android-chrome-192x192.png') }}" alt="Schematics logo" style="display: inline; vertical-align: middle;">
+            <span style="font-family: 'Fredoka One', cursive;"><b>Schematics 2021</b></span>
+        </button>
         {% if form.has_google_auth or form.has_facebook_auth or form.has_github_auth %}
             <h4>{{ _('Or log in with...') }}</h4>
             {% if form.has_google_auth %}
