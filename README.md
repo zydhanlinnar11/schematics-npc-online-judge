@@ -47,8 +47,8 @@ Finally, the DMOJ comes with fixtures so that the initial install is not blank. 
 ```sh
 ./scripts/manage.py loaddata navbar
 ./scripts/manage.py loaddata language_small
-./scripts/manage.py loaddata role
 ./scripts/manage.py loaddata panitia
+./scripts/manage.py loaddata role
 ./scripts/manage.py loaddata problemgroup
 ./scripts/manage.py loaddata problemtag
 ./scripts/manage.py loaddata blogpost
