@@ -1,19 +1,21 @@
 import itertools
-from django.db.models.base import Model
 import json
 from datetime import datetime
 from operator import attrgetter, itemgetter
 
 from django.http.request import HttpRequest
 import jwt
+
 from urllib.parse import urlparse
+
 from django.conf import settings
+
+import random
 
 from django.utils.http import is_same_domain
 
-import random
-from typing import Union
 import string
+from typing import Union
 
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
