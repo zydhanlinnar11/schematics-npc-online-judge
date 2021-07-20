@@ -1,45 +1,42 @@
 [
-    
-    {
-        "fields": {
-            "authors": [
-                1
-            ],
-            "content": "Hai **Schematroops!** Selamat datang di portal **[Schematics NPC Junior 2021](https://schematics.its.ac.id/sch-npc/portal/junior/)**. Platform ini akan digunakan sebagai platform tutorial hingga babak final pada **[Schematics NPC Junior 2021](https://schematics.its.ac.id/sch-npc/portal/junior/)**. Apabila terdapat pertanyaan silahkan ditanyakan melalui Discord Schematics NPC 2021.\n\nJangan lupa, ikuti juga sosial media [Schematics 2021](https://schematics.its.ac.id) :\n\nTwitter : [@schematics_its](https://twitter.com/schematics_its)\n\nInstagram : [@schematics.its](https://www.instagram.com/schematics.its)\n\nFacebook : [Schematics HMTC ITS-Surabaya](https://www.facebook.com/schematicshmtc)\n\nYouTube : [Schematics ITS Surabaya](https://www.youtube.com/channel/UCry-PhEw0TWERzp69HeRFpA)\n\nLinkedIn : [Schematics ITS](https://www.linkedin.com/company/schematicsits)\n\nLINE : [Schematics ITS](https://line.me/R/ti/p/%40qie3870y)\n\nTikTok : [@schematics.its](https://www.tiktok.com/@schematics.its?lang=id)\n\nHave a nice day, **Schematroops!**",
-            "og_image": "",
-            "publish_on": "2021-07-10T12:45:00+07:00",
-            "slug": "selamat-datang-di-schematics-npc-junior-2021",
-            "sticky": true,
-            "summary": "",
-            "title": "Selamat datang di Schematics NPC Junior 2021",
-            "visible": true
-        },
-        "model": "judge.blogpost",
-        "pk": 1
+  {
+    "fields": {
+      "authors": [1],
+      "content": "Hai **Schematroops!** Selamat datang di portal **[Schematics NPC Junior 2021](https://schematics.its.ac.id/sch-npc/portal/junior/)**. Platform ini akan digunakan sebagai platform tutorial hingga babak final pada **[Schematics NPC Junior 2021](https://schematics.its.ac.id/sch-npc/portal/junior/)**. Apabila terdapat pertanyaan silahkan ditanyakan melalui Discord Schematics NPC 2021.\n\nJangan lupa, ikuti juga sosial media [Schematics 2021](https://schematics.its.ac.id) :\n\nTwitter : [@schematics_its](https://twitter.com/schematics_its)\n\nInstagram : [@schematics.its](https://www.instagram.com/schematics.its)\n\nFacebook : [Schematics HMTC ITS-Surabaya](https://www.facebook.com/schematicshmtc)\n\nYouTube : [Schematics ITS Surabaya](https://www.youtube.com/channel/UCry-PhEw0TWERzp69HeRFpA)\n\nLinkedIn : [Schematics ITS](https://www.linkedin.com/company/schematicsits)\n\nLINE : [Schematics ITS](https://line.me/R/ti/p/%40qie3870y)\n\nTikTok : [@schematics.its](https://www.tiktok.com/@schematics.its?lang=id)\n\nHave a nice day, **Schematroops!**",
+      "og_image": "",
+      "publish_on": "2021-07-10T12:45:00+07:00",
+      "slug": "selamat-datang-di-schematics-npc-junior-2021",
+      "sticky": true,
+      "summary": "",
+      "title": "Selamat datang di Schematics NPC Junior 2021",
+      "visible": true
     },
-    {
-        "fields": {
-            "author": 1,
-            "body": "Tetap semangat!",
-            "hidden": false,
-            "level": 0,
-            "lft": 1,
-            "page": "b:1",
-            "parent": null,
-            "rght": 2,
-            "score": 0,
-            "time": "2021-07-10T12:45:00+07:00",
-            "tree_id": 1
-        },
-        "model": "judge.comment",
-        "pk": 1
+    "model": "judge.blogpost",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "author": 1,
+      "body": "Tetap semangat!",
+      "hidden": false,
+      "level": 0,
+      "lft": 1,
+      "page": "b:1",
+      "parent": null,
+      "rght": 2,
+      "score": 0,
+      "time": "2021-07-10T12:45:00+07:00",
+      "tree_id": 1
     },
-    {
-        "fields": {
-            "domain": "schematics.its.ac.id/sch-npc/portal/junior",
-            "name": "Schematics NPC Junior 2021"
-        },
-        "model": "sites.site",
-        "pk": 1
-    }
+    "model": "judge.comment",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "domain": "schematics.its.ac.id/sch-npc/portal/junior",
+      "name": "Schematics NPC Junior 2021"
+    },
+    "model": "sites.site",
+    "pk": 1
+  }
 ]

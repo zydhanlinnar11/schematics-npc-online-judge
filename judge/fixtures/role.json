@@ -1,38 +1,34 @@
 [
-    {
-        "fields": {
-            "about": "Panitia dari Schematics NPC 2021.",
-            "access_code": null,
-            "admins": [
-                1, 2, 3, 4
-            ],
-            "creation_date": "2021-07-10T12:45:00+07:00",
-            "is_open": false,
-            "slug": "panitia-sch-npc-2021",
-            "name": "Panitia Schematics NPC 2021",
-            "registrant": 1,
-            "short_name": "PANITIA",
-            "slots": null
-        },
-        "model": "judge.organization",
-        "pk": 1
+  {
+    "fields": {
+      "about": "Panitia dari Schematics NPC 2021.",
+      "access_code": null,
+      "admins": [1, 2, 3, 4],
+      "creation_date": "2021-07-10T12:45:00+07:00",
+      "is_open": false,
+      "slug": "panitia-sch-npc-2021",
+      "name": "Panitia Schematics NPC 2021",
+      "registrant": 1,
+      "short_name": "PANITIA",
+      "slots": null
     },
-    {
-        "fields": {
-            "about": "Peserta dari Schematics NPC Junior 2021.",
-            "access_code": null,
-            "admins": [
-                1, 2, 3, 4
-            ],
-            "creation_date": "2021-07-10T12:45:00+07:00",
-            "is_open": false,
-            "slug": "peserta-sch-npc-junior-2021",
-            "name": "Peserta Schematics NPC Junior 2021",
-            "registrant": 1,
-            "short_name": "PESERTA",
-            "slots": null
-        },
-        "model": "judge.organization",
-        "pk": 2
-    }
+    "model": "judge.organization",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "about": "Peserta dari Schematics NPC Junior 2021.",
+      "access_code": null,
+      "admins": [1, 2, 3, 4],
+      "creation_date": "2021-07-10T12:45:00+07:00",
+      "is_open": false,
+      "slug": "peserta-sch-npc-junior-2021",
+      "name": "Peserta Schematics NPC Junior 2021",
+      "registrant": 1,
+      "short_name": "PESERTA",
+      "slots": null
+    },
+    "model": "judge.organization",
+    "pk": 2
+  }
 ]

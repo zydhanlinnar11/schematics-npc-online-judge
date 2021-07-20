@@ -1,45 +1,39 @@
 [
-    {
-        "fields": {
-            "about": "",
-            "ace_theme": "github",
-            "current_contest": null,
-            "display_rank": "user",
-            "language": 15,
-            "math_engine": "auto",
-            "mute": false,
-            "organizations": [
-                2
-            ],
-            "performance_points": 0.0,
-            "points": 0.0,
-            "problem_count": 0,
-            "rating": null,
-            "timezone": "Asia/Jakarta",
-            "user": 2021,
-            "user_script": ""
-        },
-        "model": "judge.profile",
-        "pk": 2021
+  {
+    "fields": {
+      "about": "",
+      "ace_theme": "github",
+      "current_contest": null,
+      "display_rank": "user",
+      "language": 69,
+      "math_engine": "auto",
+      "mute": false,
+      "organizations": [2],
+      "performance_points": 0.0,
+      "points": 0.0,
+      "problem_count": 0,
+      "rating": null,
+      "timezone": "Asia/Jakarta",
+      "user": 2021,
+      "user_script": ""
     },
-    {
-        "fields": {
-            "date_joined": "2021-07-10T12:45:00+07:00",
-            "email": "dummy@dummy.com",
-            "first_name": "Peserta Dummy",
-            "groups": [
-
-            ],
-            "is_active": true,
-            "is_staff": false,
-            "is_superuser": false,
-            "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
-            "user_permissions": [
-
-            ],
-            "username": "pesertadummy"
-        },
-        "model": "auth.user",
-        "pk": 2021
-    }
+    "model": "judge.profile",
+    "pk": 2021
+  },
+  {
+    "fields": {
+      "date_joined": "2021-07-10T12:45:00+07:00",
+      "email": "dummy@dummy.com",
+      "first_name": "Peserta Dummy",
+      "groups": [],
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$36000$eFRRZq4DgktS$md1gk0bBJb7PH/+3YEXkcCW8K+KmiI+y/amqR32G2DY=",
+      "user_permissions": [],
+      "username": "pesertadummy"
+    },
+    "model": "auth.user",
+    "pk": 2021
+  }
 ]
