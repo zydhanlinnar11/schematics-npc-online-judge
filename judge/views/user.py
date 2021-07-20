@@ -1,16 +1,18 @@
-from django.db.models.base import Model
 import itertools
+from django.db.models.base import Model
 import json
 from datetime import datetime
 from operator import attrgetter, itemgetter
+
 from django.http.request import HttpRequest
 import jwt
-from django.conf import settings
 from urllib.parse import urlparse
+from django.conf import settings
+
 from django.utils.http import is_same_domain
-from calendar import timegm
-from typing import Union
+
 import random
+from typing import Union
 import string
 
 from django.contrib.auth import login as auth_login
@@ -416,7 +418,7 @@ def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exceptio
         token = request.POST['token']
     except KeyError:
         raise Exception('No token provided.')
-    
+
     try:
         decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
         email = decoded_jwt['email']
@@ -442,7 +444,7 @@ def schematics_auth_login(request: HttpRequest) -> JsonResponse:
         user_obj = User.objects.get(email=email)
     except User.DoesNotExist:
         return JsonResponse({'message': 'User does not exist'}, status=400)
-        
+
     auth_login(request, user_obj, backend='django.contrib.auth.backends.ModelBackend')
 
     return JsonResponse({'message': 'Login success as ' + user_obj.username}, status=200)
@@ -461,7 +463,7 @@ def create_or_find_school(school_name: str, school_shortname: str) -> str:
             short_name=school_shortname,
             name=school_name,
             is_open=False,
-            registrant=nopal
+            registrant=nopal,
         )
         school.admins.add(zydhan, nopal, syafiq, daniel)
         school.save()
@@ -487,7 +489,7 @@ def create_user(email: str, name: str, school_name: str,
         password='_blank',
         is_active=True,
         is_staff=False,
-        is_superuser=False
+        is_superuser=False,
     )
     user.set_password(''.join(random.sample(string.ascii_letters + string.digits + string.punctuation, 16)))
     user.save()
@@ -501,7 +503,7 @@ def schematics_auth_register(request: HttpRequest) -> JsonResponse:
         verify_referer(request)
     except Exception as e:
         return JsonResponse({'message': str(e)}, status=403)
-    
+
     try:
         email = request.GET['email']
         name = request.GET['name']
@@ -510,7 +512,7 @@ def schematics_auth_register(request: HttpRequest) -> JsonResponse:
         timezone = request.GET.get('timezone', 'Asia/Jakarta')
     except KeyError as e:
         return JsonResponse({'message': str(e)}, status=400)
-    
+
     school_shortname = school_name
     if len(school_shortname) > 20:
         school_shortname = school_shortname[0:19]
