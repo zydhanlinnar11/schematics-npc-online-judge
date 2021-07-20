@@ -1,12 +1,13 @@
 import itertools
 import json
+import random
+import string
 from datetime import datetime
 from operator import attrgetter, itemgetter
-import random
-from urllib.parse import urlparse
-import string
 from typing import Union
+from urllib.parse import urlparse
 
+import jwt
 from django.conf import settings
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -29,7 +30,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _, gettext_lazy
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, TemplateView
-import jwt
 from reversion import revisions
 
 from judge.forms import CustomAuthenticationForm, ProfileForm, newsletter_id
