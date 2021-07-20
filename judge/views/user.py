@@ -2,8 +2,8 @@ import itertools
 import json
 from datetime import datetime
 from operator import attrgetter, itemgetter
-from urllib.parse import urlparse
 import random
+from urllib.parse import urlparse
 import string
 from typing import Union
 
@@ -22,15 +22,15 @@ from django.http.request import HttpRequest
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.http import is_same_domain
 from django.utils.formats import date_format
+from django.utils.http import is_same_domain
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _, gettext_lazy
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, TemplateView
-from reversion import revisions
 import jwt
+from reversion import revisions
 
 from judge.forms import CustomAuthenticationForm, ProfileForm, newsletter_id
 from judge.models import Organization, Profile, Rating, Submission
