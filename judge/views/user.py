@@ -2,21 +2,12 @@ import itertools
 import json
 from datetime import datetime
 from operator import attrgetter, itemgetter
-
-from django.http.request import HttpRequest
-import jwt
-
 from urllib.parse import urlparse
-
-from django.conf import settings
-
 import random
-
-from django.utils.http import is_same_domain
-
 import string
 from typing import Union
 
+from django.conf import settings
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -27,9 +18,11 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import Count, Max, Min
 from django.http import Http404, HttpResponseRedirect, JsonResponse
+from django.http.request import HttpRequest
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.http import is_same_domain
 from django.utils.formats import date_format
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
@@ -37,6 +30,7 @@ from django.utils.translation import gettext as _, gettext_lazy
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, TemplateView
 from reversion import revisions
+import jwt
 
 from judge.forms import CustomAuthenticationForm, ProfileForm, newsletter_id
 from judge.models import Organization, Profile, Rating, Submission
