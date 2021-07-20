@@ -46,7 +46,7 @@ You will also need to generate the static files:
 Finally, the DMOJ comes with fixtures so that the initial install is not blank. They can be loaded with the following commands:
 ```sh
 ./scripts/manage.py loaddata navbar
-./scripts/manage.py loaddata language_small
+./scripts/manage.py loaddata language_all
 ./scripts/manage.py loaddata panitia
 ./scripts/manage.py loaddata role
 ./scripts/manage.py loaddata problemgroup
