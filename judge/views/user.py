@@ -457,10 +457,12 @@ def create_or_find_school(school_name: str, school_shortname: str) -> str:
         nopal = Profile.objects.get(pk=2)
         syafiq = Profile.objects.get(pk=3)
         daniel = Profile.objects.get(pk=4)
-        school = Organization.objects.create(short_name=school_shortname,
-                                            name=school_name,
-                                            is_open=False,
-                                            registrant=nopal)
+        school = Organization.objects.create(
+            short_name=school_shortname,
+            name=school_name,
+            is_open=False,
+            registrant=nopal
+        )
         school.admins.add(zydhan, nopal, syafiq, daniel)
         school.save()
         return school
@@ -478,10 +480,15 @@ def create_user_profile(user: User, school: Organization, timezone: str) -> Prof
 def create_user(email: str, name: str, school_name: str,
                 school_shortname: str, username: str, timezone: str) -> User:
     school = create_or_find_school(school_name, school_shortname)
-    user = User.objects.create(email=email, first_name=name,
-                                username=username, password='_blank',
-                                is_active=True, is_staff=False,
-                                is_superuser=False)
+    user = User.objects.create(
+        email=email,
+        first_name=name,
+        username=username,
+        password='_blank',
+        is_active=True,
+        is_staff=False,
+        is_superuser=False
+    )
     user.set_password(''.join(random.sample(string.ascii_letters + string.digits + string.punctuation, 16)))
     user.save()
     create_user_profile(user, school, timezone)
