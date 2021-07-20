@@ -24,8 +24,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.formats import date_format
-from django.utils.http import is_same_domain
 from django.utils.functional import cached_property
+from django.utils.http import is_same_domain
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _, gettext_lazy
 from django.views.decorators.http import require_POST
