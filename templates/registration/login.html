@@ -77,7 +77,7 @@
         </form>
         <br><a href="{{ url('password_reset') }}">{{ _('Forgot your password?') }}</a>
         <h4 style="margin-bottom: 8px;">{{ _('Or log in with...') }}</h4>
-        <button onclick="window.open('https://schematics.its.ac.id/dashboard/my/sch-npc/team', '_self')" aria-label="Login with Schematics" id="button-schematics">
+        <button onclick="schematicsLogin()" aria-label="Login with Schematics" id="button-schematics">
             <img width="48" height="48" src="{{ static('icons/android-chrome-192x192.png') }}" alt="Schematics logo" style="display: inline; vertical-align: middle;">
             <span style="font-family: 'Fredoka One', cursive;"><b>Schematics 2021</b></span>
         </button>
@@ -100,4 +100,22 @@
             {% endif %}
         {% endif %}
     </div>
+
+    <script src="{{ static('schematics-auth.js') }}"></script>
+
+    <script>
+        function redirectToIntended() {
+            const urlSearchParams = new URLSearchParams(window.location.search)
+            window.open(urlSearchParams.get('next'), '_self')
+        }
+
+        async function schematicsLogin() {
+            try {
+                await tryLoginWithJWT(await getTokenFromSchematics(), document.querySelector('[name=csrfmiddlewaretoken]').value)
+                redirectToIntended()
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    </script>
 {% endblock %}

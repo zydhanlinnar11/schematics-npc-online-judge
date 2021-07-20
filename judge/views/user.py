@@ -411,7 +411,7 @@ def verify_referer(request: HttpRequest) -> Union[Exception, bool]:
 def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exception]:
     jwt_algorithm = 'HS256'
     try:
-        token = request.GET.get('token')
+        token = request.POST['token']
     except KeyError:
         raise Exception('No token provided.')
     
@@ -422,15 +422,13 @@ def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exceptio
             raise Exception('Expired time required')
     except jwt.ExpiredSignatureError:
         raise Exception('Token Expired')
-    except Exception:
-        raise Exception('Failed to decode token')
+    except Exception as e:
+        raise Exception(str(e))
     return email
 
 def schematics_auth_login(request: HttpRequest) -> JsonResponse:
-    try:
-        verify_referer(request)
-    except Exception as e:
-        return JsonResponse({'message': str(e)}, status=403)
+    if request.method != 'POST':
+        return JsonResponse({'message': 'Only support POST method'}, status=400)
 
     try:
         email = get_email_from_schematics_token(request)
