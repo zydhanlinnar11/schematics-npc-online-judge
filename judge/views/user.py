@@ -1,18 +1,14 @@
-from django.db.models.base import Model
 import itertools
 import json
-from datetime import datetime
-from operator import attrgetter, itemgetter
-from django.http.request import HttpRequest
-import jwt
-from django.conf import settings
-from urllib.parse import urlparse
-from django.utils.http import is_same_domain
-from calendar import timegm
-from typing import Union
 import random
 import string
+from datetime import datetime
+from operator import attrgetter, itemgetter
+from typing import Union
+from urllib.parse import urlparse
 
+import jwt
+from django.conf import settings
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -23,11 +19,13 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import Count, Max, Min
 from django.http import Http404, HttpResponseRedirect, JsonResponse
+from django.http.request import HttpRequest
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.formats import date_format
 from django.utils.functional import cached_property
+from django.utils.http import is_same_domain
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _, gettext_lazy
 from django.views.decorators.http import require_POST
@@ -395,6 +393,7 @@ def get_contest_redirection(decoded_jwt):
         redirect_to = '/'
     return redirect_to
 
+
 def verify_referer(request: HttpRequest) -> Union[Exception, bool]:
     referer = request.META.get('HTTP_REFERER')
     if referer is None:
@@ -408,13 +407,14 @@ def verify_referer(request: HttpRequest) -> Union[Exception, bool]:
         raise Exception('Only support GET method')
     return True
 
+
 def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exception]:
     jwt_algorithm = 'HS256'
     try:
         token = request.POST['token']
     except KeyError:
         raise Exception('No token provided.')
-    
+
     try:
         decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
         email = decoded_jwt['email']
@@ -425,6 +425,7 @@ def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exceptio
     except Exception as e:
         raise Exception(str(e))
     return email
+
 
 def schematics_auth_login(request: HttpRequest) -> JsonResponse:
     if request.method != 'POST':
@@ -439,10 +440,11 @@ def schematics_auth_login(request: HttpRequest) -> JsonResponse:
         user_obj = User.objects.get(email=email)
     except User.DoesNotExist:
         return JsonResponse({'message': 'User does not exist'}, status=400)
-        
+
     auth_login(request, user_obj, backend='django.contrib.auth.backends.ModelBackend')
 
     return JsonResponse({'message': 'Login success as ' + user_obj.username}, status=200)
+
 
 def create_or_find_school(school_name: str, school_shortname: str) -> str:
     try:
@@ -453,10 +455,16 @@ def create_or_find_school(school_name: str, school_shortname: str) -> str:
         nopal = Profile.objects.get(pk=2)
         syafiq = Profile.objects.get(pk=3)
         daniel = Profile.objects.get(pk=4)
-        school = Organization.objects.create(short_name=school_shortname, name=school_name, is_open=False, registrant=nopal)
+        school = Organization.objects.create(
+            short_name=school_shortname,
+            name=school_name,
+            is_open=False,
+            registrant=nopal,
+        )
         school.admins.add(zydhan, nopal, syafiq, daniel)
         school.save()
         return school
+
 
 def create_user_profile(user: User, school: Organization, timezone: str) -> Profile:
     profile = Profile.objects.create(math_engine="auto", user=user, timezone=timezone)
@@ -466,33 +474,45 @@ def create_user_profile(user: User, school: Organization, timezone: str) -> Prof
 
     return profile
 
-def create_user(email: str, name: str, school_name: str, school_shortname: str, username: str, timezone: str) -> User:
+
+def create_user(email: str, name: str, school_name: str,
+                school_shortname: str, username: str, timezone: str) -> User:
     school = create_or_find_school(school_name, school_shortname)
-    user = User.objects.create(email=email, first_name=name, username=username, password='_blank', is_active=True, is_staff=False, is_superuser=False)
+    user = User.objects.create(
+        email=email,
+        first_name=name,
+        username=username,
+        password='_blank',
+        is_active=True,
+        is_staff=False,
+        is_superuser=False,
+    )
     user.set_password(''.join(random.sample(string.ascii_letters + string.digits + string.punctuation, 16)))
     user.save()
     create_user_profile(user, school, timezone)
 
     return user
 
+
 def schematics_auth_register(request: HttpRequest) -> JsonResponse:
     try:
         verify_referer(request)
     except Exception as e:
         return JsonResponse({'message': str(e)}, status=403)
-    
+
     try:
         email = request.GET['email']
         name = request.GET['name']
         school_name = request.GET['school_name']
-        id_in_schematics_db=request.GET['id_in_schematics_db']
+        id_in_sch_db = request.GET['id_in_schematics_db']
         timezone = request.GET.get('timezone', 'Asia/Jakarta')
     except KeyError as e:
         return JsonResponse({'message': str(e)}, status=400)
-    
+
     school_shortname = school_name
     if len(school_shortname) > 20:
         school_shortname = school_shortname[0:19]
-    username = 'sch_npc_j{id_in_schematics_db}_{very_first_name_lowercase}'.format(id_in_schematics_db=id_in_schematics_db, very_first_name_lowercase=name.split(' ')[0]).lower()
+    username = 'sch_npc_j{id_in_sch_db}_{very_first_name_lowercase}'
+    username = username.format(id_in_schematics_db=id_in_sch_db, very_first_name_lowercase=name.split(' ')[0]).lower()
     create_user(email, name, school_name, school_shortname, username, timezone)
     return JsonResponse({'message': 'User registered'})
