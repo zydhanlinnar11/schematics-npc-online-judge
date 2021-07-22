@@ -1,13 +1,13 @@
 import itertools
 import json
 import random
-import requests
 import string
 from datetime import datetime
 from operator import attrgetter, itemgetter
 from typing import Union
 from urllib.parse import urlparse
 
+import requests
 from django.conf import settings
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -416,8 +416,9 @@ def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exceptio
     response = requests.post(
         'https://schematics.its.ac.id/api/user/get-user-info',
         headers={
-            "authorization": "Bearer " + token
-        }
+            "authorization": "Bearer " + token,
+        },
+        verify=False,
     )
     if response.status_code != 200:
         raise Exception('Unauthorized')
