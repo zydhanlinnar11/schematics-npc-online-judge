@@ -1,4 +1,3 @@
-const SCHEMATICS_URL = 'https://schematics.its.ac.id'
 const PORTAL_JUNIOR_PATH = '/sch-npc/portal/junior'
 const LOGIN_PATH = `${PORTAL_JUNIOR_PATH}/accounts/schematics/auth/login`
 
@@ -10,7 +9,7 @@ async function tryLoginWithJWT(token, csrftoken) {
   try {
     const formData = new FormData()
     formData.append('token', token)
-    const response = await fetch(`${SCHEMATICS_URL}${LOGIN_PATH}`, {
+    const response = await fetch(`${LOGIN_PATH}`, {
       method: 'POST',
       headers: {
         'X-CSRFToken': csrftoken,
