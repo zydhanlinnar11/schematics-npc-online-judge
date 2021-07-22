@@ -272,13 +272,13 @@ block title_row %} {% set title = contest.name %} {% include
     $('#show-organizations-checkbox').click(function () {
       $('.organization-column').toggle()
       localStorage.setItem(
-        'sch_npc_junior' + 'show-organizations',
+        'sch_npc_junior_' + 'show-organizations',
         $('.organization-column').is(':visible') ? 'true' : 'false'
       )
     })
 
     if (
-      localStorage.getItem('sch_npc_junior' + 'show-organizations') == 'true'
+      localStorage.getItem('sch_npc_junior_' + 'show-organizations') == 'true'
     ) {
       $('.organization-column').show()
       $('#show-organizations-checkbox').prop('checked', true)

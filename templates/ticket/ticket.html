@@ -214,25 +214,25 @@
             var page_ref;
 
             function increase_page_ref() {
-                if ('sch_npc_junior' + page_ref_key in localStorage)
-                    localStorage['sch_npc_junior' + page_ref_key] = page_ref = +localStorage['sch_npc_junior' + page_ref_key] + 1;
+                if ('sch_npc_junior_' + page_ref_key in localStorage)
+                    localStorage['sch_npc_junior_' + page_ref_key] = page_ref = +localStorage['sch_npc_junior_' + page_ref_key] + 1;
                 else
-                    localStorage['sch_npc_junior' + page_ref_key] = page_ref = 1;
+                    localStorage['sch_npc_junior_' + page_ref_key] = page_ref = 1;
             }
 
             function decrease_page_ref() {
-                if ('sch_npc_junior' + page_ref_key in localStorage) {
-                    localStorage['sch_npc_junior' + page_close_key] = page_ref;
-                    delete localStorage['sch_npc_junior' + page_close_key];
-                    localStorage['sch_npc_junior' + page_ref_key] = +localStorage['sch_npc_junior' + page_ref_key] - 1;
+                if ('sch_npc_junior_' + page_ref_key in localStorage) {
+                    localStorage['sch_npc_junior_' + page_close_key] = page_ref;
+                    delete localStorage['sch_npc_junior_' + page_close_key];
+                    localStorage['sch_npc_junior_' + page_ref_key] = +localStorage['sch_npc_junior_' + page_ref_key] - 1;
                 }
                 page_ref = null;
             }
 
             function is_highest_ref() {
-                console.log(localStorage['sch_npc_junior' + page_ref_key], page_ref);
-                if ('sch_npc_junior' + page_ref_key in localStorage)
-                    return +localStorage['sch_npc_junior' + page_ref_key] == page_ref;
+                console.log(localStorage['sch_npc_junior_' + page_ref_key], page_ref);
+                if ('sch_npc_junior_' + page_ref_key in localStorage)
+                    return +localStorage['sch_npc_junior_' + page_ref_key] == page_ref;
                 return true;
             }
 

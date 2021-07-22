@@ -119,8 +119,8 @@
                 return false;
             });
 
-            if (localStorage.getItem('sch_npc_junior' + "contest_timer_pos")) {
-                data = localStorage.getItem('sch_npc_junior' + "contest_timer_pos").split(":");
+            if (localStorage.getItem('sch_npc_junior_' + "contest_timer_pos")) {
+                data = localStorage.getItem('sch_npc_junior_' + "contest_timer_pos").split(":");
                 $("#contest-info").css({
                     left: data[0],
                     top: data[1]
@@ -139,7 +139,7 @@
                     left_px = (x_pos - x_elem) + 'px';
                     top_px = (y_pos - y_elem) + 'px';
 
-                    localStorage.setItem('sch_npc_junior' + "contest_timer_pos", left_px + ":" + top_px);
+                    localStorage.setItem('sch_npc_junior_' + "contest_timer_pos", left_px + ":" + top_px);
 
                     selected.css({
                         left: left_px,

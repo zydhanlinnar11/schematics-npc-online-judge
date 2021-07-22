@@ -302,7 +302,7 @@ window.notification_template = {
 window.notification_timeout = 5000
 
 window.notify = function (type, title, data, timeout) {
-  if (localStorage['sch_npc_junior' + type + '_notification'] != 'true') return
+  if (localStorage['sch_npc_junior_' + type + '_notification'] != 'true') return
   var template =
     window[type + '_notification_template'] || window.notification_template
   var data =
@@ -321,16 +321,16 @@ window.register_notify = function (type, options) {
 
   function status_change() {
     if ('change' in options)
-      options.change(localStorage['sch_npc_junior' + key] == 'true')
+      options.change(localStorage['sch_npc_junior_' + key] == 'true')
   }
 
   var key = type + '_notification'
   if ('Notification' in window) {
     if (
-      !('sch_npc_junior' + key in localStorage) ||
+      !('sch_npc_junior_' + key in localStorage) ||
       Notification.permission !== 'granted'
     )
-      localStorage['sch_npc_junior' + key] = 'false'
+      localStorage['sch_npc_junior_' + key] = 'false'
 
     if ('$checkbox' in options) {
       options.$checkbox
@@ -344,17 +344,17 @@ window.register_notify = function (type, options) {
             } else
               Notification.requestPermission(function (permission) {
                 if (permission === 'granted') {
-                  localStorage['sch_npc_junior' + key] = 'true'
+                  localStorage['sch_npc_junior_' + key] = 'true'
                   notify(type, 'Notification enabled!')
                 } else localStorage['sch_npc_junior' + key] = 'false'
                 status_change()
               })
           } else {
-            localStorage['sch_npc_junior' + key] = 'false'
+            localStorage['sch_npc_junior_' + key] = 'false'
             status_change()
           }
         })
-        .prop('checked', localStorage['sch_npc_junior' + key] == 'true')
+        .prop('checked', localStorage['sch_npc_junior_' + key] == 'true')
     }
 
     $(window).on('storage', function (e) {
@@ -367,7 +367,7 @@ window.register_notify = function (type, options) {
     })
   } else {
     if ('$checkbox' in options) options.$checkbox.hide()
-    localStorage['sch_npc_junior' + key] = 'false'
+    localStorage['sch_npc_junior_' + key] = 'false'
   }
   status_change()
 }

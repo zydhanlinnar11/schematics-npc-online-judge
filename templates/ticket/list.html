@@ -94,7 +94,7 @@
       change: function (enabled) {
         if (!enabled)
           for (key in localStorage)
-            if (key.startsWith('sch_npc_junior' + 'ticket:open:'))
+            if (key.startsWith('sch_npc_junior_' + 'ticket:open:'))
               delete localStorage[key]
       },
     })
@@ -102,8 +102,8 @@
     function main_list_notify(id) {
       key = 'ticket:open:' + id
       return (
-        !('sch_npc_junior' + key in localStorage) ||
-        localStorage['sch_npc_junior' + key] == '0'
+        !('sch_npc_junior_' + key in localStorage) ||
+        localStorage['sch_npc_junior_' + key] == '0'
       )
     }
 
