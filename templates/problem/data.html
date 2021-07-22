@@ -242,10 +242,10 @@
             $controls.find('input').change(function () {
                 var $this = $(this), suffix = $this.attr('data-suffix'), checked = $this.is(':checked');
                 $table.find('.' + suffix.replace(/_/g, '-')).toggle(checked);
-                localStorage.setItem('data-visible:' + problem + ':' + suffix, checked ? '1' : '0')
+                localStorage.setItem('sch_npc_junior' + 'data-visible:' + problem + ':' + suffix, checked ? '1' : '0')
             }).each(function () {
                 var $this = $(this), suffix = $this.attr('data-suffix'), filled = false;
-                filled = localStorage.getItem('data-visible:' + problem + ':' + suffix);
+                filled = localStorage.getItem('sch_npc_junior' + 'data-visible:' + problem + ':' + suffix);
                 if (filled !== null)
                     filled = filled == '1';
                 else {
