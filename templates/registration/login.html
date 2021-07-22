@@ -114,7 +114,7 @@
                 await tryLoginWithJWT(getTokenFromSchematics(), document.querySelector('[name=csrfmiddlewaretoken]').value)
                 redirectToIntended()
             } catch (e) {
-                console.log(e)
+                window.open('https://schematics.its.ac.id/dashboard/signin', '_self')
             }
         }
     </script>
