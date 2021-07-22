@@ -111,7 +111,7 @@
 
         async function schematicsLogin() {
             try {
-                await tryLoginWithJWT(await getTokenFromSchematics(), document.querySelector('[name=csrfmiddlewaretoken]').value)
+                await tryLoginWithJWT(getTokenFromSchematics(), document.querySelector('[name=csrfmiddlewaretoken]').value)
                 redirectToIntended()
             } catch (e) {
                 console.log(e)

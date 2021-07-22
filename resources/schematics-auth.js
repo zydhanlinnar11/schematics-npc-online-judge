@@ -1,16 +1,9 @@
 const SCHEMATICS_URL = 'https://schematics.its.ac.id'
-const JWT_API_PATH = '/'
 const PORTAL_JUNIOR_PATH = '/sch-npc/portal/junior'
 const LOGIN_PATH = `${PORTAL_JUNIOR_PATH}/accounts/schematics/auth/login`
 
-async function getTokenFromSchematics() {
-  try {
-    const response = await fetch(`${SCHEMATICS_URL}${JWT_API_PATH}`)
-    const token = await response.json()
-    return token
-  } catch (err) {
-    throw err
-  }
+function getTokenFromSchematics() {
+  return localStorage.getItem('token')
 }
 
 async function tryLoginWithJWT(token, csrftoken) {

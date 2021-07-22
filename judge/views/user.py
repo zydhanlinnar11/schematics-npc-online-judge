@@ -1,13 +1,13 @@
 import itertools
 import json
 import random
+import requests
 import string
 from datetime import datetime
 from operator import attrgetter, itemgetter
 from typing import Union
 from urllib.parse import urlparse
 
-import jwt
 from django.conf import settings
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -409,22 +409,19 @@ def verify_referer(request: HttpRequest) -> Union[Exception, bool]:
 
 
 def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exception]:
-    jwt_algorithm = 'HS256'
     try:
         token = request.POST['token']
     except KeyError:
         raise Exception('No token provided.')
-
-    try:
-        decoded_jwt = jwt.decode(token, settings.SCHEMATICS_JWT_SECRET, algorithms=[jwt_algorithm])
-        email = decoded_jwt['email']
-        if 'exp' not in decoded_jwt:
-            raise Exception('Expired time required')
-    except jwt.ExpiredSignatureError:
-        raise Exception('Token Expired')
-    except Exception as e:
-        raise Exception(str(e))
-    return email
+    response = requests.post(
+        'https://schematics.its.ac.id/api/user/get-user-info',
+        headers={
+            "authorization": "Bearer " + token
+        }
+    )
+    if response.status_code != 200:
+        raise Exception('Unauthorized')
+    return response.json()['data']['email']
 
 
 def schematics_auth_login(request: HttpRequest) -> JsonResponse:
