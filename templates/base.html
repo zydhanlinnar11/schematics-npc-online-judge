@@ -250,7 +250,7 @@
                 </ul>
             {% else %}
                 <span class="anon">
-                    <a href="{{ url('auth_login') }}?next={{ LOGIN_RETURN_PATH|urlencode }}"><b>{{ _('Log in') }}</b></a>
+                    <a href="javascript:schematicsLogin()"><b>{{ _('Log in') }}</b></a>
                 </span>
             {% endif %}
         </span>
@@ -321,4 +321,18 @@
     </footer>
 </div>
 </body>
+
+{% if not request.user.is_authenticated %}
+<script src="{{ static('schematics-auth.js') }}"></script>
+<script>
+    async function schematicsLogin() {
+        try {
+            await tryLoginWithJWT(getTokenFromSchematics(), document.querySelector('[name=csrfmiddlewaretoken]').value)
+            location.reload()
+        } catch (e) {
+            window.open('https://schematics.its.ac.id/dashboard/signin', '_self')
+        }
+    }
+</script>
+{% endif %}
 </html>
