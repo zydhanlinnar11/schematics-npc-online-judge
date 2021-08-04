@@ -1,10 +1,11 @@
 import itertools
 import json
 import random
+import re
 import string
 from datetime import datetime
 from operator import attrgetter, itemgetter
-from typing import Union
+from typing import Tuple, Union
 from urllib.parse import urlparse
 
 import requests
@@ -28,6 +29,7 @@ from django.utils.functional import cached_property
 from django.utils.http import is_same_domain
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _, gettext_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView, TemplateView
 from reversion import revisions
@@ -394,21 +396,7 @@ def get_contest_redirection(decoded_jwt):
     return redirect_to
 
 
-def verify_referer(request: HttpRequest) -> Union[Exception, bool]:
-    referer = request.META.get('HTTP_REFERER')
-    if referer is None:
-        raise Exception('No referer')
-    referer = urlparse(referer)
-    if referer.scheme != 'https':
-        raise Exception('Connection not secure')
-    if not any(is_same_domain(referer.netloc, host) for host in settings.CSRF_TRUSTED_ORIGINS):
-        raise Exception('Bad referer ' + referer.geturl())
-    if request.method != 'GET':
-        raise Exception('Only support GET method')
-    return True
-
-
-def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exception]:
+def get_info_from_schematics_token(request: HttpRequest, info: str) -> Union[str, Exception]:
     try:
         token = request.POST['token']
     except KeyError:
@@ -422,7 +410,7 @@ def get_email_from_schematics_token(request: HttpRequest) -> Union[str, Exceptio
     )
     if response.status_code != 200:
         raise Exception('Unauthorized')
-    return response.json()['data']['email']
+    return response.json()['data'][info]
 
 
 def schematics_auth_login(request: HttpRequest) -> JsonResponse:
@@ -430,7 +418,7 @@ def schematics_auth_login(request: HttpRequest) -> JsonResponse:
         return JsonResponse({'message': 'Only support POST method'}, status=400)
 
     try:
-        email = get_email_from_schematics_token(request)
+        email = get_info_from_schematics_token(request, 'email')
     except Exception as e:
         return JsonResponse({'message': str(e)}, status=403)
 
@@ -473,44 +461,96 @@ def create_user_profile(user: User, school: Organization, timezone: str) -> Prof
     return profile
 
 
-def create_user(email: str, name: str, school_name: str,
+def create_user(email: str, first_name: str, last_name: str, school_name: str,
                 school_shortname: str, username: str, timezone: str) -> User:
     school = create_or_find_school(school_name, school_shortname)
-    user = User.objects.create(
-        email=email,
-        first_name=name,
-        username=username,
-        password='_blank',
-        is_active=True,
-        is_staff=False,
-        is_superuser=False,
-    )
-    user.set_password(''.join(random.sample(string.ascii_letters + string.digits + string.punctuation, 16)))
-    user.save()
-    create_user_profile(user, school, timezone)
+    try:
+        User.objects.get(email=email)
+        raise Exception('User exists')
+    except User.DoesNotExist:
+        user = User.objects.create(
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            password='_blank',
+            is_active=True,
+            is_staff=False,
+            is_superuser=False,
+        )
+        user.set_password(''.join(random.sample(string.ascii_letters + string.digits + string.punctuation, 16)))
+        user.save()
+        create_user_profile(user, school, timezone)
 
-    return user
+        return user
 
 
+def get_first_and_last_name(name: str) -> Tuple[str, str]:
+    name = name.split(' ')
+    first_name = name[0]
+    last_name = ''
+    for i in range(1, int(len(name) / 2)):
+        first_name += ' ' + name[i]
+    for i in range(int(len(name) / 2), len(name)):
+        last_name += name[i]
+        if i != (len(name) - 1):
+            last_name += ' '
+
+    return first_name, last_name
+
+
+def filter_username(username: str) -> str:
+    regex = re.compile('^[\w@.+\-]')
+    ret = ''
+    for i in range(0, len(username)):
+        if regex.match(username[i]) == None:
+            ret += '_'
+        else:
+            ret += username[i]
+    return ret
+
+
+@csrf_exempt
 def schematics_auth_register(request: HttpRequest) -> JsonResponse:
-    try:
-        verify_referer(request)
-    except Exception as e:
-        return JsonResponse({'message': str(e)}, status=403)
+    if request.method != 'POST':
+        return JsonResponse({'message': 'Only support POST method'}, status=400)
 
     try:
-        email = request.GET['email']
-        name = request.GET['name']
-        school_name = request.GET['school_name']
-        id_in_sch_db = request.GET['id_in_schematics_db']
-        timezone = request.GET.get('timezone', 'Asia/Jakarta')
-    except KeyError as e:
+        email = request.POST['email']
+        name = request.POST['name']
+        school_name = request.POST['school_name']
+        username = filter_username(request.POST['username'])
+        is_admin = get_info_from_schematics_token(request, 'user_role') == 'admin'
+        timezone = request.POST.get('timezone', 'Asia/Jakarta')
+    except Exception as e:
         return JsonResponse({'message': str(e)}, status=400)
+
+    if not is_admin:
+        return JsonResponse({'message': 'Unauthorized'}, status=401)
+
+    first_name, last_name = get_first_and_last_name(name)
 
     school_shortname = school_name
     if len(school_shortname) > 20:
         school_shortname = school_shortname[0:19]
-    username = 'sch_npc_j{id_in_sch_db}_{very_first_name_lowercase}'
-    username = username.format(id_in_schematics_db=id_in_sch_db, very_first_name_lowercase=name.split(' ')[0]).lower()
-    create_user(email, name, school_name, school_shortname, username, timezone)
+    try:
+        create_user(email, first_name, last_name, school_name, school_shortname, username, timezone)
+    except Exception as e:
+        return JsonResponse({'message': str(e)}, status=400)
     return JsonResponse({'message': 'User registered'})
+
+
+def schematics_auth_check_register(request: HttpRequest) -> JsonResponse:
+    if request.method != 'GET':
+        return JsonResponse({'message': 'Only support GET method'}, status=400)
+
+    try:
+        email = request.GET['email']
+    except Exception as e:
+        return JsonResponse({'message': str(e)}, status=400)
+
+    try:
+        User.objects.get(email=email)
+    except User.DoesNotExist:
+        return JsonResponse({'status': False}, status=400)
+    return JsonResponse({'status': True}, status=200)
