@@ -35,7 +35,7 @@ from django.views.generic import DetailView, ListView, TemplateView
 from reversion import revisions
 
 from judge.forms import CustomAuthenticationForm, ProfileForm, newsletter_id
-from judge.models import Organization, Profile, Rating, Submission
+from judge.models import Language, Organization, Profile, Rating, Submission
 from judge.performance_points import get_pp_breakdown
 from judge.ratings import rating_class, rating_progress
 from judge.utils.problems import contest_completed_ids, user_completed_ids
@@ -456,6 +456,7 @@ def create_user_profile(user: User, school: Organization, timezone: str) -> Prof
     profile = Profile.objects.create(math_engine="auto", user=user, timezone=timezone)
     peserta_sch_npc = Organization.objects.get(pk=2)
     profile.organizations.add(school, peserta_sch_npc)
+    profile.language = Language.objects.get(key='CPP17')
     profile.save()
 
     return profile
@@ -509,6 +510,33 @@ def filter_username(username: str) -> str:
             ret += username[i]
     return ret
 
+def get_sch_timezone(province: str = '') -> str:
+    wit = [
+        'PAPUA',
+        'PAPUA BARAT',
+        'MALUKU',
+        'MALUKU UTARA'
+    ]
+    wita = [
+        'BALI',
+        'NUSA TENGGARA BARAT',
+        'NUSA TENGGARA TIMUR',
+        'KALIMANTAN SELATAN',
+        'KALIMANTAN TIMUR',
+        'KALIMANTAN UTARA',
+        'SULAWESI UTARA',
+        'GORONTALO',
+        'SULAWESI TENGAH',
+        'SULAWESI BARAT',
+        'SULAWESI SELATAN',
+        'SULAWESI TENGGARA'
+    ]
+    if province in wit:
+        return 'Asia/Jayapura'
+    if province in wita:
+        return 'Asia/Makassar'
+    return 'Asia/Jakarta'
+
 
 @csrf_exempt
 def schematics_auth_register(request: HttpRequest) -> JsonResponse:
@@ -521,7 +549,7 @@ def schematics_auth_register(request: HttpRequest) -> JsonResponse:
         school_name = request.POST['school_name']
         username = filter_username(request.POST['username'])
         is_admin = get_info_from_schematics_token(request, 'user_role') == 'admin'
-        timezone = request.POST.get('timezone', 'Asia/Jakarta')
+        timezone = get_sch_timezone(request.POST.get('province', 'JAWA TIMUR'))
     except Exception as e:
         return JsonResponse({'message': str(e)}, status=400)
 
