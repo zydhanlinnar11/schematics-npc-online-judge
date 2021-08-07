@@ -108,9 +108,6 @@
     "exsyst/swagger": {
         "version": "v0.4.1"
     },
-    "firebase/php-jwt": {
-        "version": "v5.2.1"
-    },
     "fortawesome/font-awesome": {
         "version": "5.9.0"
     },
@@ -382,9 +379,6 @@
     "symfony/dependency-injection": {
         "version": "v4.3.2"
     },
-    "symfony/deprecation-contracts": {
-        "version": "v2.4.0"
-    },
     "symfony/doctrine-bridge": {
         "version": "v4.3.2"
     },
@@ -496,9 +490,6 @@
     "symfony/options-resolver": {
         "version": "v4.3.2"
     },
-    "symfony/orm-pack": {
-        "version": "v2.1.0"
-    },
     "symfony/phpunit-bridge": {
         "version": "4.3",
         "recipe": {
@@ -538,9 +529,6 @@
     },
     "symfony/property-info": {
         "version": "v4.3.2"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v4.4.18"
     },
     "symfony/routing": {
         "version": "4.2",

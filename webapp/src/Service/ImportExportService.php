@@ -20,7 +20,6 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\AssignedGenerator;
-use Doctrine\ORM\Id\IdentityGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\NonUniqueResultException;
 use Exception;
@@ -829,7 +828,7 @@ class ImportExportService
         foreach ($data as $idx => $team) {
             $teamData[] = [
                 'team' => [
-                    'teamid' => $team['id'] ?? null,
+                    'teamid' => $team['id'],
                     'icpcid' => $team['icpc_id'] ?? null,
                     'categoryid' => $team['group_ids'][0] ?? null,
                     'name' => @$team['name'],
@@ -857,6 +856,10 @@ class ImportExportService
     {
         // We want to overwrite the ID so change the ID generator
         $metadata = $this->em->getClassMetaData(TeamCategory::class);
+        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata->setIdGenerator(new AssignedGenerator());
+
+        $metadata = $this->em->getClassMetaData(Team::class);
         $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
         $metadata->setIdGenerator(new AssignedGenerator());
 
@@ -921,18 +924,7 @@ class ImportExportService
             $teamItem['team']['category'] = $teamCategory;
             unset($teamItem['team']['categoryid']);
 
-            $metadata = $this->em->getClassMetaData(Team::class);
-
-            // Determine if we need to set the team ID manually or automatically
-            if (empty($teamItem['team']['teamid'])) {
-                $team = null;
-                $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_IDENTITY);
-                $metadata->setIdGenerator(new IdentityGenerator());
-            } else {
-                $team = $this->em->getRepository(Team::class)->find($teamItem['team']['teamid']);
-                $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
-                $metadata->setIdGenerator(new AssignedGenerator());
-            }
+            $team = $this->em->getRepository(Team::class)->find($teamItem['team']['teamid']);
             if (!$team) {
                 $team  = new Team();
                 $added = true;
