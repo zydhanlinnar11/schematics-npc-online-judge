@@ -17,6 +17,13 @@ async function tryLoginWithJWT(token, csrftoken) {
       body: formData,
       mode: 'same-origin',
     })
+    const json = await response.json()
+    if (json.message === 'User does not exist') {
+      alert(
+        'Akun anda belum terdaftar di portal Schematics NPC 2021.\nPastikan akun anda sudah terverifikasi dan mohon menunggu beberapa saat lagi untuk sinkronisasi data.\nTerima kasih.'
+      )
+      return
+    }
     if (response.status != 200) throw new Error('Login failed')
     return { success: true }
   } catch (err) {
