@@ -413,7 +413,7 @@ class APIUserList(APIListView):
                 latest_volatility=Subquery(latest_rating_subquery.values('volatility')[:1]),
             )
             .order_by('id')
-            .only('id', 'points', 'performance_points', 'problem_count', 'display_rank')
+            .only('id', 'points', 'performance_points', 'problem_count', 'display_rank', 'organizations')
         )
 
     def get_object_data(self, profile):
@@ -426,6 +426,8 @@ class APIUserList(APIListView):
             'fullname': full_name,
             'points': profile.points,
             'performance_points': profile.performance_points,
+            'school_id': profile.organizations.all()[0].pk,
+            'school_name': profile.organizations.all()[0].name,
             'problem_count': profile.problem_count,
             'rank': profile.display_rank,
             'rating': profile.latest_rating,
