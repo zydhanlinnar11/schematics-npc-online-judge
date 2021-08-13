@@ -612,6 +612,7 @@ class APIOrganizationList(APIListView):
             'id': organization.id,
             'slug': organization.slug,
             'short_name': organization.short_name,
+            'name': organization.name,
             'is_open': organization.is_open,
             'member_count': organization.member_count,
         }
