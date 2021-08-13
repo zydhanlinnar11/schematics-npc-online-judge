@@ -406,6 +406,8 @@ class APIUserList(APIListView):
             Profile.objects
             .filter(is_unlisted=False, user__is_active=True)
             .annotate(
+                first_name=F('user__first_name'),
+                last_name=F('user__last_name'),
                 username=F('user__username'),
                 latest_rating=Subquery(latest_rating_subquery.values('rating')[:1]),
                 latest_volatility=Subquery(latest_rating_subquery.values('volatility')[:1]),
@@ -415,9 +417,13 @@ class APIUserList(APIListView):
         )
 
     def get_object_data(self, profile):
+        full_name = profile.first_name
+        if profile.last_name:
+            full_name = profile.first_name + ' ' + profile.last_name
         return {
             'id': profile.id,
             'username': profile.username,
+            'fullname': full_name,
             'points': profile.points,
             'performance_points': profile.performance_points,
             'problem_count': profile.problem_count,
