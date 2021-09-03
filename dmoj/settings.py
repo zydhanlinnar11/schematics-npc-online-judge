@@ -525,4 +525,4 @@ try:
 except IOError:
     pass
 
-CSRF_TRUSTED_ORIGINS = ['schematics.its.ac.id', 'sch-npc-junior.zydhan.xyz']
+CSRF_TRUSTED_ORIGINS = ['schematics.its.ac.id', 'sch-npc-junior.zydhan.xyz', 'junior.schematics-npc.its.ac.id']
