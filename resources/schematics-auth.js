@@ -1,4 +1,4 @@
-const PORTAL_JUNIOR_PATH = '/'
+const PORTAL_JUNIOR_PATH = '/sch-npc/portal/junior'
 const LOGIN_PATH = `${PORTAL_JUNIOR_PATH}/accounts/schematics/auth/login`
 
 function getTokenFromSchematics() {
