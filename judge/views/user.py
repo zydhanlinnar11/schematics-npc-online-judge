@@ -6,7 +6,6 @@ import string
 from datetime import datetime
 from operator import attrgetter, itemgetter
 from typing import Tuple, Union
-from urllib.parse import urlparse
 
 import requests
 from django.conf import settings
@@ -26,7 +25,6 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.formats import date_format
 from django.utils.functional import cached_property
-from django.utils.http import is_same_domain
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _, gettext_lazy
 from django.views.decorators.csrf import csrf_exempt
@@ -501,21 +499,22 @@ def get_first_and_last_name(name: str) -> Tuple[str, str]:
 
 
 def filter_username(username: str) -> str:
-    regex = re.compile('^[\w@.+\-]')
+    regex = re.compile(r'^[w@.+-]')
     ret = ''
     for i in range(0, len(username)):
-        if regex.match(username[i]) == None:
+        if regex.match(username[i]) is None:
             ret += '_'
         else:
             ret += username[i]
     return ret
+
 
 def get_sch_timezone(province: str = '') -> str:
     wit = [
         'PAPUA',
         'PAPUA BARAT',
         'MALUKU',
-        'MALUKU UTARA'
+        'MALUKU UTARA',
     ]
     wita = [
         'BALI',
@@ -529,7 +528,7 @@ def get_sch_timezone(province: str = '') -> str:
         'SULAWESI TENGAH',
         'SULAWESI BARAT',
         'SULAWESI SELATAN',
-        'SULAWESI TENGGARA'
+        'SULAWESI TENGGARA',
     ]
     if province in wit:
         return 'Asia/Jayapura'
