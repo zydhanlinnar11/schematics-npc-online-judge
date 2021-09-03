@@ -17,7 +17,7 @@ DEBUG = os.environ.get('DEBUG', '0') == '1'
 
 # Uncomment and set to the domain names this site is intended to serve.
 # You must do this once you set DEBUG to False.
-ALLOWED_HOSTS = ['schematics.its.ac.id', 'sch-npc-junior.zydhan.xyz', 'junior.schematics-npc.its.ac.id']
+ALLOWED_HOSTS = ['schematics.its.ac.id', 'sch-npc-junior.zydhan.xyz']
 
 # Optional apps that DMOJ can make use of.
 INSTALLED_APPS += ()
@@ -122,7 +122,7 @@ SERVER_EMAIL = 'Zydhan Linnar Putra <zydhan.19051@mhs.its.ac.id>'
 STATIC_ROOT = '/assets/static/'
 
 # URL to access static files.
-# STATIC_URL = '/sch-npc/portal/junior/static/'
+STATIC_URL = '/sch-npc/portal/junior/static/'
 
 # Uncomment to use hashed filenames with the cache framework.
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
@@ -281,8 +281,8 @@ DMOJ_PROBLEM_DATA_ROOT = '/problems/'
 DMOJ_RESOURCES = '/assets/resources/'
 
 MEDIA_ROOT = '/media/'
-# MEDIA_URL = '/sch-npc/portal/junior/media/'
+MEDIA_URL = '/sch-npc/portal/junior/media/'
 SCHEMATICS_JWT_SECRET = os.environ.get('SCHEMATICS_JWT_SECRET', '')
-# CSRF_COOKIE_PATH='/sch-npc/portal/junior'
-# LANGUAGE_COOKIE_PATH='/sch-npc/portal/junior'
-# SESSION_COOKIE_PATH='/sch-npc/portal/junior'
+CSRF_COOKIE_PATH='/sch-npc/portal/junior'
+LANGUAGE_COOKIE_PATH='/sch-npc/portal/junior'
+SESSION_COOKIE_PATH='/sch-npc/portal/junior'
